@@ -10,7 +10,7 @@ import {
 import { User } from "@/types/user";
 import axios, { AxiosRequestConfig } from "axios";
 
-const baseUrl = env.VITE_API_URL;
+const baseUrl = import.meta.env.DEV ? env.VITE_API_URL : env.VITE_PROD_API_URL;
 
 const localStorageKey = "__singa_app_token__";
 const localStorageKeyRefresh = "__singa_app_refresh_token__";
