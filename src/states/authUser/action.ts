@@ -42,6 +42,15 @@ function asyncSetAuthUser(email: string, password: string, toast: TToast) {
       await auth.login({ email, password });
       const user = await auth.me();
 
+      if (user.role.name !== "admin") {
+        toast({
+          title: "Error",
+          description: "Unauthorized to access this page",
+        });
+        dispatch(receiveAuthUserActionCreator("Error", null));
+        return;
+      }
+
       toast({
         title: "Success",
         description: "Logged in successfully",
