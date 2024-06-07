@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useAppDispatch } from "@/hooks/useRedux";
 import { loginSchema } from "@/schema/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -22,14 +21,14 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Eye, EyeOff } from "lucide-react";
-import { asyncSetAuthUser } from "@/states/authUser/action";
 import { useToast } from "./ui/use-toast";
+import useLogin from "@/hooks/useLogin";
 
 export default function LoginForm() {
   const { toast } = useToast();
   const [type, setType] = useState<"text" | "password">("password");
 
-  const dispatch = useAppDispatch();
+  const { status, mutate } = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -40,7 +39,19 @@ export default function LoginForm() {
   });
 
   function handleSubmit(data: z.infer<typeof loginSchema>) {
-    dispatch(asyncSetAuthUser(data.email, data.password, toast));
+    mutate(data, {
+      onSuccess: () => {
+        toast({
+          title: "Login Success",
+        });
+      },
+      onError: (error) => {
+        toast({
+          title: "Login Failed",
+          description: error.message,
+        });
+      },
+    });
   }
 
   return (
@@ -105,7 +116,11 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={status === "pending"}
+            >
               Login
             </Button>
           </form>

@@ -1,3 +1,5 @@
+import { Role } from "./role";
+
 export type User = {
   id: number;
   name: string;
@@ -15,11 +17,4 @@ export type User = {
 export type Conversation = {
   used: number;
   quota: number;
-};
-
-export type Role = {
-  id: number;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
 };

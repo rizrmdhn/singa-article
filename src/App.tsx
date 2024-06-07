@@ -1,28 +1,19 @@
 import { useEffect } from "react";
 import { Toaster } from "./components/ui/toaster";
-import { useAppDispatch, useAppSelector } from "./hooks/useRedux";
-import { asyncSetIsPreload } from "./states/isPreload/action";
 import Routes from "./routes/routes";
-import { asyncGetLocalTheme } from "./states/theme/action";
+import useTheme from "./hooks/useTheme";
+import { setTheme } from "./lib/theme";
 
 function App() {
-  const isPreload = useAppSelector((state) => state.isPreload);
-  const authUser = useAppSelector((state) => state.authUser);
-
-  const dispatch = useAppDispatch();
+  const { data: theme } = useTheme();
 
   useEffect(() => {
-    dispatch(asyncSetIsPreload());
-    dispatch(asyncGetLocalTheme());
-  }, [dispatch]);
-
-  if (isPreload) {
-    return null;
-  }
+    setTheme(theme ?? "light");
+  }, [theme]);
 
   return (
     <>
-      <Routes authUser={authUser} />
+      <Routes />
       <Toaster />
     </>
   );
