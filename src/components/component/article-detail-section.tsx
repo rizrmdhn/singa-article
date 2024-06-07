@@ -1,26 +1,19 @@
 import moment from "moment";
 import "moment/locale/id";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Skeleton } from "../ui/skeleton";
 import useGetDetailArticle from "@/hooks/useGetDetailArticle";
-import { useEffect } from "react";
+import { ErrorComponent } from "./error-component";
 
 export function ArticleDetailSection() {
-  const navigate = useNavigate();
-
   const { id } = useParams();
 
   if (id === undefined) return null;
 
   const { data, status, error } = useGetDetailArticle(id);
 
-  useEffect(() => {
-    if (error) {
-      // navigate back
-      navigate(-1);
-    }
-  }, [error, status]);
+  if (error) return <ErrorComponent error={error.message} />;
 
   return (
     <div className="mx-auto min-w-full max-w-6xl px-4 py-12 md:px-6 md:py-16 lg:py-20">
