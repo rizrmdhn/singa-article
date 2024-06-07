@@ -1,4 +1,4 @@
-import { CircleUser, Home, Menu, Newspaper, Package2 } from "lucide-react";
+import { Home, Menu, Newspaper, Package2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
