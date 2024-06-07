@@ -1,9 +1,14 @@
 import { Article } from "@/types/articles";
+import { useNavigate } from "react-router-dom";
 
 export default function ArticleCard(article: Article) {
+  const navigate = useNavigate();
   return (
-    <div className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-      <a className="absolute inset-0 z-10" href="#">
+    <div className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:cursor-pointer hover:shadow-xl">
+      <a
+        className="absolute inset-0 z-10"
+        onClick={() => navigate(`/articles/${article.id}`)}
+      >
         <span className="sr-only">View article</span>
       </a>
       <img

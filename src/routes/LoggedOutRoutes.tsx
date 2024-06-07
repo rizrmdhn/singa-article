@@ -1,3 +1,4 @@
+import DetailArticlePage from "@/pages/DetailArticlePage";
 import GlobalArticlePage from "@/pages/GlobalArticlePage";
 import LoginPage from "@/pages/LoginPage";
 import NotFoundPage from "@/pages/NotFoundPage";
@@ -8,6 +9,7 @@ export default function LoggedOutRoutes() {
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/articles" element={<GlobalArticlePage />} />
+      <Route path="/articles/:id" element={<DetailArticlePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

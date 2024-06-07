@@ -6,5 +6,6 @@ export default function useGetDetailArticle(id: string) {
     queryKey: ["articleDetail", id],
     queryFn: () => articles.getArticleDetail(id),
     enabled: id !== undefined,
+    retry: 1,
   });
 }
