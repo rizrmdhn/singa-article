@@ -1,14 +1,15 @@
+import SchemaValidationError from "@/errors/SchemaValidationError";
 import env from "@/schema/env";
-import { Article } from "@/types/articles";
+import { Article, DetailArticle } from "@/types/articles";
 import {
+  ErrorResponse,
   LoginResponse,
-  Response,
+  SchemaErrorResponse,
   SuccessResponse,
-  SuccessResponseWithoutData,
   UpdateTokenResponse,
 } from "@/types/response";
 import { User } from "@/types/user";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const baseUrl = import.meta.env.DEV ? env.VITE_API_URL : env.VITE_PROD_API_URL;
 
@@ -79,79 +80,102 @@ const auth = (() => {
     email: string;
     password: string;
   }) {
-    const response = await axios.post(`${baseUrl}/login`, {
-      email,
-      password,
-    });
+    try {
+      const response = await axios.post(`${baseUrl}/login`, {
+        email,
+        password,
+      });
 
-    const { meta } = response.data as Response<LoginResponse>;
+      const { data } = response.data as SuccessResponse<LoginResponse>;
 
-    if (meta.code !== 200 || meta.status !== "success") {
-      throw new Error(meta.message);
+      localStorageFunctions.setToken(data.token);
+      localStorageFunctions.setRefreshToken(data.refreshToken);
+    } catch (error) {
+      const customError = error as AxiosError<ErrorResponse>;
+
+      if (customError.response?.data?.meta.code === 401) {
+        throw new Error(customError.response?.data?.meta.message);
+      }
+
+      throw new Error(customError.response?.data?.meta.message);
     }
-
-    const { data } = response.data as SuccessResponse<LoginResponse>;
-
-    localStorageFunctions.setToken(data.token);
-    localStorageFunctions.setRefreshToken(data.refreshToken);
   }
 
   async function logout() {
-    const response = await fetchWithAuth(`${baseUrl}/logout`, {
-      method: "POST",
-      data: {
-        refreshToken: localStorageFunctions.getRefreshToken(),
-      },
-    });
+    try {
+      await fetchWithAuth(`${baseUrl}/logout`, {
+        method: "POST",
+        data: {
+          refreshToken: localStorageFunctions.getRefreshToken(),
+        },
+      });
 
-    const { meta } = response.data as SuccessResponseWithoutData;
+      localStorageFunctions.removeToken();
+      localStorageFunctions.removeRefreshToken();
+    } catch (error) {
+      const customError = error as AxiosError<ErrorResponse>;
 
-    if (meta.code !== 200 || meta.status !== "success") {
-      throw new Error(meta.message);
+      if (customError.response?.data?.meta.code === 401) {
+        throw new Error(customError.response?.data?.meta.message);
+      }
+
+      throw new Error(customError.response?.data?.meta.message);
     }
-
-    localStorageFunctions.removeToken();
-    localStorageFunctions.removeRefreshToken();
   }
 
   async function refresh() {
-    const token = localStorageFunctions.getToken();
+    try {
+      const token = localStorageFunctions.getToken();
 
-    if (!token) {
-      return;
+      if (!token) {
+        throw new Error("Token not found");
+      }
+
+      const response = await axios.post(`${baseUrl}/refresh`, {
+        token: localStorageFunctions.getRefreshToken(),
+      });
+
+      const { data } = response.data as SuccessResponse<UpdateTokenResponse>;
+
+      localStorageFunctions.setToken(data.token);
+
+      const user = await me();
+
+      return user;
+    } catch (error) {
+      const customError = error as AxiosError<ErrorResponse>;
+
+      throw new Error(customError.response?.data?.meta.message);
     }
-
-    const response = await axios.post(`${baseUrl}/refresh`, {
-      token: localStorageFunctions.getRefreshToken(),
-    });
-
-    const { meta } = response.data as Response<UpdateTokenResponse>;
-
-    if (meta.code !== 200 || meta.status !== "success") {
-      throw new Error(meta.message);
-    }
-
-    const { data } = response.data as SuccessResponse<UpdateTokenResponse>;
-
-    localStorageFunctions.setToken(data.token);
-
-    const user = await me();
-
-    return user;
   }
 
   async function me() {
-    const response = await fetchWithAuth(`${baseUrl}/users/me`);
+    try {
+      const response = await fetchWithAuth(`${baseUrl}/users/me`);
 
-    const { meta } = response.data as SuccessResponse<User>;
+      const { meta } = response.data as SuccessResponse<User>;
 
-    if (meta.code !== 200 || meta.status !== "success") {
-      throw new Error(meta.message);
+      if (meta.code !== 200 || meta.status !== "success") {
+        throw new Error(meta.message);
+      }
+
+      const { data } = response.data as SuccessResponse<User>;
+
+      return data;
+    } catch (error) {
+      const schemaError = error as AxiosError<SchemaErrorResponse>;
+
+      if (schemaError.response?.data?.errors) {
+        throw new SchemaValidationError(schemaError.response.data.errors);
+      }
+
+      const err = error as AxiosError<ErrorResponse>;
+      if (err.response?.data?.meta.code === 401) {
+        await refresh();
+      }
+
+      throw new Error(err.response?.data?.meta.message);
     }
-
-    const { data } = response.data as SuccessResponse<User>;
-
-    return data;
   }
 
   return { login, logout, refresh, me };
@@ -159,17 +183,41 @@ const auth = (() => {
 
 const articles = (() => {
   async function getArticles() {
-    const response = await fetchWithAuth(`${baseUrl}/articles`);
+    try {
+      const response = await fetchWithAuth(`${baseUrl}/articles`);
 
-    const { meta } = response.data as SuccessResponse<Article[]>;
+      const { data } = response.data as SuccessResponse<Article[]>;
 
-    if (meta.code !== 200 || meta.status !== "success") {
-      throw new Error(meta.message);
+      return data;
+    } catch (error) {
+      const schemaError = error as AxiosError<SchemaErrorResponse>;
+
+      if (schemaError.response?.data?.errors) {
+        throw new SchemaValidationError(schemaError.response.data.errors);
+      }
+
+      const err = error as AxiosError<ErrorResponse>;
+      throw new Error(err.response?.data?.meta.message);
     }
+  }
 
-    const { data } = response.data as SuccessResponse<Article[]>;
+  async function getArticleDetail(id: string) {
+    try {
+      const response = await fetchWithAuth(`${baseUrl}/articles/${id}`);
 
-    return data;
+      const { data } = response.data as SuccessResponse<DetailArticle>;
+
+      return data;
+    } catch (error) {
+      const schemaError = error as AxiosError<SchemaErrorResponse>;
+
+      if (schemaError.response?.data?.errors) {
+        throw new SchemaValidationError(schemaError.response.data.errors);
+      }
+
+      const err = error as AxiosError<ErrorResponse>;
+      throw new Error(err.response?.data?.meta.message);
+    }
   }
 
   async function addArticle({
@@ -186,20 +234,28 @@ const articles = (() => {
     formData.append("description", description);
     formData.append("image", image[0]);
 
-    const response = await fetchWithAuth(`${baseUrl}/articles`, {
-      method: "POST",
-      data: formData,
-    });
+    try {
+      const response = await fetchWithAuth(`${baseUrl}/articles`, {
+        method: "POST",
+        data: formData,
+      });
 
-    const { meta } = response.data as SuccessResponse<Article>;
+      const { data } = response.data as SuccessResponse<Article>;
 
-    if (meta.code !== 201 || meta.status !== "success") {
-      throw new Error(meta.message);
+      return data;
+    } catch (error) {
+      const schemaError = error as AxiosError<SchemaErrorResponse>;
+      if (schemaError.response?.data?.errors) {
+        throw new SchemaValidationError(schemaError.response.data.errors);
+      }
+
+      const err = error as AxiosError<ErrorResponse>;
+      if (err.response?.data.meta.message) {
+        throw new Error(err.response.data.meta.message);
+      }
+
+      throw error;
     }
-
-    const { data } = response.data as SuccessResponse<Article>;
-
-    return data;
   }
 
   async function updateArticle({
@@ -211,46 +267,70 @@ const articles = (() => {
     id: string;
     title: string;
     description: string;
-    image: File;
+    image?: FileList;
   }) {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("image", image);
-
-    const response = await fetchWithAuth(`${baseUrl}/articles/${id}`, {
-      method: "PUT",
-      data: formData,
-    });
-
-    const { meta } = response.data as SuccessResponse<Article>;
-
-    if (meta.code !== 200 || meta.status !== "success") {
-      throw new Error(meta.message);
+    if (image) {
+      formData.append("image", image[0]);
     }
 
-    const { data } = response.data as SuccessResponse<Article>;
+    try {
+      const response = await fetchWithAuth(`${baseUrl}/articles/${id}`, {
+        method: "PUT",
+        data: formData,
+      });
 
-    return data;
+      const { data } = response.data as SuccessResponse<Article>;
+
+      return data;
+    } catch (error) {
+      const schemaError = error as AxiosError<SchemaErrorResponse>;
+
+      if (schemaError.response?.data?.errors) {
+        throw new SchemaValidationError(schemaError.response.data.errors);
+      }
+
+      const err = error as AxiosError<ErrorResponse>;
+
+      if (err.response?.data?.meta.message) {
+        throw new Error(err.response.data.meta.message);
+      }
+    }
   }
 
   async function deleteArticle(id: string) {
-    const response = await fetchWithAuth(`${baseUrl}/articles/${id}`, {
-      method: "DELETE",
-    });
+    try {
+      const response = await fetchWithAuth(`${baseUrl}/articles/${id}`, {
+        method: "DELETE",
+      });
 
-    const { meta } = response.data as SuccessResponse<Article>;
+      const { data } = response.data as SuccessResponse<Article>;
 
-    if (meta.code !== 200 || meta.status !== "success") {
-      throw new Error(meta.message);
+      return data;
+    } catch (error) {
+      const schemaError = error as AxiosError<SchemaErrorResponse>;
+
+      if (schemaError.response?.data?.errors) {
+        throw new SchemaValidationError(schemaError.response.data.errors);
+      }
+
+      const err = error as AxiosError<ErrorResponse>;
+
+      if (err.response?.data?.meta.message) {
+        throw new Error(err.response.data.meta.message);
+      }
     }
-
-    const { data } = response.data as SuccessResponse<Article>;
-
-    return data;
   }
 
-  return { getArticles, addArticle, updateArticle, deleteArticle };
+  return {
+    getArticles,
+    getArticleDetail,
+    addArticle,
+    updateArticle,
+    deleteArticle,
+  };
 })();
 
 export { localStorageFunctions, auth, articles };

@@ -15,7 +15,6 @@ export type ErrorResponse = {
 };
 
 export type SchemaErrorResponse = {
-  meta: Meta;
   errors: SchemaError[];
 };
 

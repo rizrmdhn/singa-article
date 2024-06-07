@@ -10,10 +10,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "@/hooks/useRedux";
-import { asyncUnsetAuthUser } from "@/states/authUser/action";
+import useLogout from "@/hooks/useLogout";
+import useSetTheme from "@/hooks/useSetTheme";
 export default function MobileMenu() {
-  const dispatch = useAppDispatch();
+  const { mutate, status } = useLogout();
+  const { mutate: setThemeMutation } = useSetTheme();
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -73,12 +75,13 @@ export default function MobileMenu() {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setThemeMutation()}>
+            Change Theme
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            onClick={() => {
-              dispatch(asyncUnsetAuthUser(navigate));
-            }}
+            onClick={() => mutate()}
+            disabled={status === "pending"}
           >
             Logout
           </DropdownMenuItem>
