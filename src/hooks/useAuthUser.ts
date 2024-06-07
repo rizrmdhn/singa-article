@@ -7,6 +7,6 @@ export default function useAuthUser() {
     queryFn: () => auth.me(),
     // 2 hours
     staleTime: 5 * 60 * 1000,
-    refetchInterval: 2 * 60 * 60 * 1000,
+    retry: false,
   });
 }
