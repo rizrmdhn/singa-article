@@ -17,5 +17,5 @@ export type DetailArticle = {
   createdBy: number;
   createdAt: Date;
   updatedAt: Date;
-  user: Exclude<User, "static", "conversation">;
+  user: User;
 };

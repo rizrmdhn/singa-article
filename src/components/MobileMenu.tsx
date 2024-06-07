@@ -1,4 +1,4 @@
-import { CircleUser, Home, Menu, Newspaper, Package2 } from "lucide-react";
+import { Home, Menu, Newspaper, Package2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,9 +12,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLogout from "@/hooks/useLogout";
 import useSetTheme from "@/hooks/useSetTheme";
+import useAuthUser from "@/hooks/useAuthUser";
+import { Skeleton } from "./ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 export default function MobileMenu() {
   const { mutate, status } = useLogout();
   const { mutate: setThemeMutation } = useSetTheme();
+  const { data, status: authUserStatus } = useAuthUser();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -61,15 +65,15 @@ export default function MobileMenu() {
         </SheetContent>
       </Sheet>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="secondary"
-            size="icon"
-            className="ml-auto rounded-full"
-          >
-            <CircleUser className="h-5 w-5" />
-            <span className="sr-only">Toggle user menu</span>
-          </Button>
+        <DropdownMenuTrigger className="ml-auto">
+          {authUserStatus === "pending" ? (
+            <Skeleton className="h-10 w-10" />
+          ) : (
+            <Avatar className="h-10 w-10 border">
+              <AvatarImage alt={data?.name} src={data?.avatarUrl ?? ""} />
+              <AvatarFallback>{data?.name?.[0]}</AvatarFallback>
+            </Avatar>
+          )}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
