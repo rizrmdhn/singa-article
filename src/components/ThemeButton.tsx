@@ -6,10 +6,12 @@ import useSetTheme from "@/hooks/useSetTheme";
 export default function ThemeButton() {
   const { data } = useTheme();
   const { mutate: setThemeMutation } = useSetTheme();
+
+  // sticky right o
   return (
     <Button
       variant="secondary"
-      className="absolute right-4 top-4 rounded-full p-2"
+      className="sticky right-4 top-4 z-50 h-12 w-12 self-end rounded-full p-2"
       onClick={() => setThemeMutation()}
     >
       {data === "dark" ? <Moon size={24} /> : <Sun size={24} />}
