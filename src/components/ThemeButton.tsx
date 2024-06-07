@@ -7,7 +7,6 @@ export default function ThemeButton() {
   const { data } = useTheme();
   const { mutate: setThemeMutation } = useSetTheme();
 
-  // sticky right o
   return (
     <Button
       variant="secondary"
