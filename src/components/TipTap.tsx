@@ -27,54 +27,46 @@ const Tiptap = ({
   attributPropsClassName,
   onUpdateText,
 }: TiptapProps) => {
-  const editor = useEditor(
-    {
-      extensions: [
-        StarterKit,
-        Markdown.configure({
-          html: true,
-          transformCopiedText: true,
-          transformPastedText: true,
-        }),
-        Document,
-        Heading.configure({
-          HTMLAttributes: { class: "text-black dark:text-white" },
-        }),
-        Paragraph.configure({
-          HTMLAttributes: { class: "text-black dark:text-white" },
-        }),
-        Text.configure({
-          HTMLAttributes: { class: "text-black dark:text-white" },
-        }),
-        CodeBlock.configure({
-          HTMLAttributes: {
-            class:
-              "rounded p-5 border-foreground border-2 text-black dark:text-white mb-3 mt-3",
-          },
-        }),
-        BulletList.configure({ HTMLAttributes: { class: "list-disc" } }),
-        OrderedList.configure({ HTMLAttributes: { class: "list-decimal" } }),
-      ],
-      content: text,
-      editorProps: {
-        attributes: {
-          class: cn(
-            "rounded p-5 border-foreground border-2 text-black dark:text-white prose-2xl",
-            attributPropsClassName,
-          ),
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Markdown.configure({
+        html: true,
+        transformCopiedText: true,
+        transformPastedText: true,
+      }),
+      Document,
+      Heading.configure({
+        HTMLAttributes: { class: "text-black dark:text-white" },
+      }),
+      Paragraph.configure({
+        HTMLAttributes: { class: "text-black dark:text-white" },
+      }),
+      Text.configure({
+        HTMLAttributes: { class: "text-black dark:text-white" },
+      }),
+      CodeBlock.configure({
+        HTMLAttributes: {
+          class:
+            "rounded p-5 border-foreground border-2 text-black dark:text-white mb-3 mt-3",
         },
-      },
-      // onUpdate: ({ editor }) => {
-      //   const html = editor.getHTML();
-      //   onUpdateText(html);
-      // },
-      onBlur: ({ editor }) => {
-        const html = editor.getHTML();
-        onUpdateText(html);
+      }),
+      BulletList.configure({ HTMLAttributes: { class: "list-disc" } }),
+      OrderedList.configure({ HTMLAttributes: { class: "list-decimal" } }),
+    ],
+    content: text,
+    editorProps: {
+      attributes: {
+        class: cn(
+          "rounded p-5 border-foreground border-2 text-black dark:text-white prose-2xl",
+          attributPropsClassName,
+        ),
       },
     },
-    [text],
-  );
+    onUpdate({ editor }) {
+      onUpdateText(editor.getHTML());
+    },
+  });
 
   return (
     <>

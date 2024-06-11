@@ -14,7 +14,7 @@ export const createArticleSchema = z.object({
     .min(3, {
       message: "Description is too short (minimum is 3 characters)",
     })
-    .max(2000, {
+    .max(5000, {
       message: "Description is too long (maximum is 2000 characters)",
     }),
   image: z
@@ -48,7 +48,7 @@ export const updateArticleSchema = z.object({
     .min(3, {
       message: "Description is too short (minimum is 3 characters)",
     })
-    .max(2000, {
+    .max(5000, {
       message: "Description is too long (maximum is 2000 characters)",
     }),
   image: z
