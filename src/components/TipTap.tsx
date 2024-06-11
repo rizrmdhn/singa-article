@@ -64,14 +64,6 @@ const Tiptap = ({
           ),
         },
       },
-      // onUpdate: ({ editor }) => {
-      //   const html = editor.getHTML();
-      //   onUpdateText(html);
-      // },
-      onBlur: ({ editor }) => {
-        const html = editor.getHTML();
-        onUpdateText(html);
-      },
     },
     [text],
   );
