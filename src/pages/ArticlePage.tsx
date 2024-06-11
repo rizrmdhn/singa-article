@@ -131,9 +131,15 @@ export default function ArticlePage() {
                 />
               </TableCell>
               <TableCell className="font-medium">{article.title}</TableCell>
-              <TableCell className="hidden md:table-cell">
-                {article.title}
-              </TableCell>
+              <TableCell
+                className="hidden h-8 max-w-sm text-ellipsis md:table-cell"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    article.description.length > 100
+                      ? article.description.slice(0, 100) + "..."
+                      : article.description,
+                }}
+              ></TableCell>
               <TableCell className="hidden md:table-cell">
                 {moment(article.createdAt).locale("id").format("LL")}
               </TableCell>
