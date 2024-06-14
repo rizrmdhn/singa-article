@@ -51,6 +51,11 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        blue: {
+          primary: "#4BA6F8",
+          secondary: "#397ED4",
+          tertiary: "#2656B0",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -73,6 +78,7 @@ module.exports = {
       },
       height: {
         "custom-screen": "calc(100vh - 18rem)",
+        fillMaxScreen: "100dvh",
       },
     },
   },
