@@ -4,13 +4,16 @@ import { twMerge } from "tailwind-merge";
 
 export default function FeatureSection() {
   return (
-    <section className="relative flex w-full flex-col items-center bg-white p-5">
-      <div className="bg-blue-tertiary absolute bottom-0 left-0 h-20 w-20 rounded-full mix-blend-multiply blur-3xl filter"></div>
-      <div className="bg-blue-tertiary absolute right-0 top-0 h-28 w-28 rounded-full mix-blend-multiply blur-3xl filter"></div>
+    <section
+      className="relative flex w-full flex-col items-center bg-white p-5"
+      id="feature"
+    >
+      <div className="absolute bottom-0 left-0 h-20 w-20 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
+      <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
       <h2 className="inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text text-3xl font-bold text-transparent">
         Welcome To Our
       </h2>
-      <h2 className="from-blue-primary to-blue-tertiary inline-block bg-gradient-to-b bg-clip-text text-4xl font-bold text-transparent">
+      <h2 className="inline-block bg-gradient-to-b from-blue-primary to-blue-tertiary bg-clip-text text-4xl font-bold text-transparent">
         Amazing Feature
       </h2>
       <div className="my-6 flex w-full flex-col items-center justify-center gap-5 md:gap-8">
@@ -42,19 +45,15 @@ function Feature({ title, description, image, reverse }: any) {
       initial={{ opacity: 0, y: 50 }}
       transition={{ duration: 0.5 }}
       whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       className={twMerge(
         "flex w-full flex-col items-center gap-3 md:w-2/4 md:flex-row md:gap-5",
         reverse && "md:flex-row-reverse",
       )}
     >
-      <motion.div
-        initial={{ opacity: 0, x: reverse ? 50 : -50 }}
-        transition={{ duration: 0.9 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        className="flex flex-col gap-3 md:gap-5"
-      >
+      <motion.div className="flex flex-col gap-3 md:gap-5">
         <div className="flex items-center gap-2">
-          <div className="from-blue-primary via-blue-secondary to-blue-tertiary flex h-16 w-16 items-center justify-start rounded-xl bg-gradient-to-b md:h-20 md:w-20">
+          <div className="flex h-16 w-16 items-center justify-start rounded-xl bg-gradient-to-b from-blue-primary via-blue-secondary to-blue-tertiary md:h-20 md:w-20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"

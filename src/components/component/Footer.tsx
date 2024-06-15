@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-gray-900">
+    <footer className="w-full bg-gray-900" id="contact">
       <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
@@ -376,7 +376,7 @@ export default function Footer() {
               <span className="block sm:inline">All rights reserved.</span>
 
               <a
-                className="text-blue-primary hover:text-blue-primary/75 inline-block underline transition"
+                className="inline-block text-blue-primary underline transition hover:text-blue-primary/75"
                 href="#"
               >
                 Terms & Conditions
@@ -385,7 +385,7 @@ export default function Footer() {
               <span>&middot;</span>
 
               <a
-                className="text-blue-primary hover:text-blue-primary/75 inline-block underline transition"
+                className="inline-block text-blue-primary underline transition hover:text-blue-primary/75"
                 href="#"
               >
                 Privacy Policy
