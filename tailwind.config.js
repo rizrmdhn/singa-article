@@ -21,6 +21,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sen: ["Sen", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -85,7 +88,7 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         scroll:
-          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+          "scroll var(--animation-duration, 200s) var(--animation-direction, forwards) linear infinite",
       },
       height: {
         "custom-screen": "calc(100vh - 18rem)",
