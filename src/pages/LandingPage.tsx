@@ -5,6 +5,7 @@ import { HoverImageLinks } from "@/components/component/teams";
 import Faq from "@/components/component/Faq";
 import Footer from "@/components/component/Footer";
 import Navbar from "@/components/component/Navbar";
+import BlogSection from "@/components/component/Blog";
 
 export default function LandingPage() {
   return (
@@ -14,6 +15,7 @@ export default function LandingPage() {
       <VideoSection />
       <FeatureSection />
       <HoverImageLinks />
+      <BlogSection />
       <Faq />
       <Footer />
     </main>

@@ -10,6 +10,8 @@ export default function FeatureSection() {
     >
       <div className="absolute bottom-0 left-0 h-20 w-20 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
       <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
+      <div className="absolute left-0 top-96 h-28 w-28 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
+      <div className="absolute right-0 top-1/2 h-28 w-28 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
       <h2 className="inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text text-3xl font-bold text-transparent">
         Welcome To Our
       </h2>

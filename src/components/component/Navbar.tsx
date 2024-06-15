@@ -18,8 +18,8 @@ const navItems = [
     link: "#feature",
   },
   {
-    name: "Blog",
-    link: "#blog",
+    name: "Article",
+    link: "#article",
   },
   {
     name: "Contact",

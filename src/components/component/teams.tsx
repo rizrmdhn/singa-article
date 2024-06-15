@@ -1,13 +1,14 @@
 import { useMotionValue, useSpring, useTransform, motion } from "framer-motion";
+import { Github, Linkedin } from "lucide-react";
 import { useRef } from "react";
 
 export const HoverImageLinks = () => {
   return (
     <section className="flex w-full flex-col items-center p-4 md:p-8">
-      <h2 className="from-blue-primary to-blue-tertiary inline-block bg-gradient-to-b bg-clip-text text-4xl font-bold text-transparent">
+      <h2 className="inline-block bg-gradient-to-b from-blue-primary to-blue-tertiary bg-clip-text text-4xl font-bold text-transparent">
         Our Teams
       </h2>
-      <p className="w-full text-center text-sm md:w-2/4">
+      <p className="mt-4 w-full text-center text-sm md:w-2/4">
         Singa team is a group of passionate individuals united by a common
         mission to provide you with the best in expertise and holistic care.
         Together, we are dedicated to enhancing your well-being and guiding you
@@ -87,13 +88,10 @@ const Link = ({ heading, imgSrc, subheading, href }: LinkProps) => {
   };
 
   return (
-    <motion.a
-      href={href}
-      ref={ref}
-      onMouseMove={handleMouseMove}
+    <motion.div
       initial="initial"
       whileHover="whileHover"
-      className="hover:border-blue-primary hover:border-blue-pritext-blue-primary group relative flex items-center justify-between border-b-2 border-gray-400 py-4 transition-colors duration-500 md:py-8"
+      className="hover:border-blue-pritext-blue-primary group relative flex cursor-pointer items-center justify-between border-b-2 border-gray-400 py-4 transition-colors duration-500 hover:border-blue-primary md:py-8"
     >
       <div>
         <motion.span
@@ -106,7 +104,7 @@ const Link = ({ heading, imgSrc, subheading, href }: LinkProps) => {
             staggerChildren: 0.075,
             delayChildren: 0.25,
           }}
-          className="group-hover:text-blue-primary relative z-10 block text-4xl font-bold text-gray-400 transition-colors duration-500 md:text-6xl"
+          className="relative z-10 block text-4xl font-bold text-gray-400 transition-colors duration-500 group-hover:text-blue-primary md:text-6xl"
         >
           {heading.split("").map((l, i) => (
             <motion.span
@@ -122,7 +120,7 @@ const Link = ({ heading, imgSrc, subheading, href }: LinkProps) => {
             </motion.span>
           ))}
         </motion.span>
-        <span className="group-hover:text-blue-primary relative z-10 mt-2 block text-base text-gray-400 transition-colors duration-500">
+        <span className="relative z-10 mt-2 block text-base text-gray-400 transition-colors duration-500 group-hover:text-blue-primary">
           {subheading}
         </span>
       </div>
@@ -156,11 +154,15 @@ const Link = ({ heading, imgSrc, subheading, href }: LinkProps) => {
           },
         }}
         transition={{ type: "spring" }}
-        className="relative z-10 p-4"
+        className="relative z-10 flex flex-col gap-3 p-4 md:flex-row md:gap-5"
       >
-        {/* <MdAndroid className="text-5xl text-blue-primary" /> */}
-        {/* <SiGooglecloud className="text-blue-primary text-5xl" /> */}
+        <a href="">
+          <Github className="h-10 w-10 group-hover:stroke-blue-primary" />
+        </a>
+        <a href="">
+          <Linkedin className="h-10 w-10 group-hover:stroke-blue-primary" />
+        </a>
       </motion.div>
-    </motion.a>
+    </motion.div>
   );
 };
