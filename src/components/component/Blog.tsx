@@ -6,7 +6,7 @@ export default function ArticleSection() {
     >
       {/* Title */}
       <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-        <h2 className="inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text text-3xl font-bold text-transparent">
+        <h2 className="inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text text-4xl font-bold text-transparent">
           Article
         </h2>
         <p className="mt-4">

@@ -56,12 +56,21 @@ export default function Navbar() {
   });
 
   return (
-    <header className="sticky inset-x-0 top-0 z-50 w-full bg-gradient-to-tr from-blue-primary via-blue-secondary to-blue-tertiary p-6 md:absolute md:from-transparent md:via-transparent md:to-transparent">
-      <nav className="container mx-auto">
-        <div className={cn("hidden", visible ? "md:hidden" : "md:flex")}>
+    <header
+      className={cn(
+        "sticky inset-x-0 top-0 z-50 w-full bg-gradient-to-tr from-blue-primary via-blue-secondary to-blue-tertiary p-2 md:absolute md:from-transparent md:via-transparent md:to-transparent md:p-6",
+      )}
+    >
+      <nav className="container mx-0 flex items-center justify-between md:mx-auto md:block">
+        <div
+          className={cn(
+            "hidden",
+            visible ? "md:hidden" : "items-center md:flex",
+          )}
+        >
           <div className="flex items-center justify-center gap-3">
             <img src="/logo.svg" alt="logo" className="h-20" />
-            <h1 className="text-2xl font-bold text-white">SINGA</h1>
+            <h1 className="font-sen text-4xl font-bold text-white">SINGA</h1>
           </div>
           <ul className="ml-auto hidden list-none space-x-6 text-xl font-normal md:flex">
             {navItems.map((navItem: any, idx: number) => (
@@ -76,6 +85,12 @@ export default function Navbar() {
             ))}
           </ul>
         </div>
+        <div className="flex items-center gap-5 md:hidden">
+          <img src="/logo.svg" alt="logo" className="h-16 w-16" />
+          <div className="flex flex-col">
+            <h1 className="font-sen text-2xl font-bold text-white">SINGA</h1>
+          </div>
+        </div>
         <motion.button
           initial="hide"
           animate={mobileNav ? "show" : "hide"}
@@ -89,10 +104,10 @@ export default function Navbar() {
               },
               show: {
                 rotate: 45,
-                y: 5,
+                y: 10,
               },
             }}
-            className="block h-px w-6 bg-white"
+            className="block h-1 w-8 bg-white"
           ></motion.span>
           <motion.span
             variants={{
@@ -103,7 +118,7 @@ export default function Navbar() {
                 opacity: 0,
               },
             }}
-            className="block h-px w-6 bg-white"
+            className="block h-1 w-8 bg-white"
           ></motion.span>
           <motion.span
             variants={{
@@ -115,7 +130,7 @@ export default function Navbar() {
                 y: -5,
               },
             }}
-            className="block h-px w-6 bg-white"
+            className="block h-1 w-8 bg-white"
           ></motion.span>
         </motion.button>
         <AnimatePresence mode="wait">

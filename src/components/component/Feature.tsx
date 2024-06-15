@@ -49,7 +49,7 @@ function Feature({ reverse }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       className={twMerge(
-        "flex w-full flex-col items-center gap-3 md:w-2/4 md:flex-row md:gap-5",
+        "flex w-full flex-col items-center gap-3 md:w-2/4 md:flex-row md:gap-12",
         reverse && "md:flex-row-reverse",
       )}
     >
