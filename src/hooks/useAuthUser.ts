@@ -8,5 +8,6 @@ export default function useAuthUser() {
     // 2 hours
     staleTime: 5 * 60 * 1000,
     retry: false,
+    refetchOnWindowFocus: false,
   });
 }
