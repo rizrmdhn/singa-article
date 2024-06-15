@@ -50,7 +50,7 @@ export default function Faq() {
 
   return (
     <section className="relative my-10 flex w-full flex-col items-center justify-center px-4">
-      <div className="bg-blue-tertiary absolute left-1/2 top-1/2 h-20 w-20 rounded-full mix-blend-multiply blur-3xl filter"></div>
+      <div className="absolute left-1/2 top-1/2 h-20 w-20 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
       <h2 className="inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl">
         Frequently asked questions
       </h2>
@@ -68,7 +68,7 @@ export default function Faq() {
   );
 }
 
-const Accordion = ({ i, title, description }: any) => {
+const Accordion = ({ title, description }: any) => {
   const [expanded, setExpanded] = useState(false);
 
   return (

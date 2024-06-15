@@ -1,6 +1,6 @@
 import { useMotionValue, useSpring, useTransform, motion } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
-import { useRef } from "react";
+// import { useRef } from "react";
 
 export const HoverImageLinks = () => {
   return (
@@ -57,8 +57,8 @@ interface LinkProps {
   href: string;
 }
 
-const Link = ({ heading, imgSrc, subheading, href }: LinkProps) => {
-  const ref = useRef<HTMLAnchorElement | null>(null);
+const Link = ({ heading, imgSrc, subheading }: LinkProps) => {
+  // const ref = useRef<HTMLAnchorElement | null>(null);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -69,23 +69,23 @@ const Link = ({ heading, imgSrc, subheading, href }: LinkProps) => {
   const top = useTransform(mouseYSpring, [0.5, -0.5], ["40%", "60%"]);
   const left = useTransform(mouseXSpring, [0.5, -0.5], ["60%", "70%"]);
 
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) => {
-    const rect = ref.current!.getBoundingClientRect();
+  // const handleMouseMove = (
+  //   e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  // ) => {
+  //   const rect = ref.current!.getBoundingClientRect();
 
-    const width = rect.width;
-    const height = rect.height;
+  //   const width = rect.width;
+  //   const height = rect.height;
 
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+  //   const mouseX = e.clientX - rect.left;
+  //   const mouseY = e.clientY - rect.top;
 
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
+  //   const xPct = mouseX / width - 0.5;
+  //   const yPct = mouseY / height - 0.5;
 
-    x.set(xPct);
-    y.set(yPct);
-  };
+  //   x.set(xPct);
+  //   y.set(yPct);
+  // };
 
   return (
     <motion.div

@@ -41,7 +41,7 @@ export default function FeatureSection() {
   );
 }
 
-function Feature({ title, description, image, reverse }: any) {
+function Feature({ reverse }: any) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
