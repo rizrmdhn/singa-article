@@ -13,8 +13,6 @@ export function ArticleDetailSection({ id }: { id: string }) {
 
   if (id === undefined) return <ErrorComponent error="Id not found" />;
 
-  // @ts-ignore
-
   if (error) return <ErrorComponent error={error.message} />;
 
   return (

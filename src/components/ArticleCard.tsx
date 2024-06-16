@@ -1,10 +1,22 @@
+import { apiGetDetailArticles } from "@/lib/api";
 import type { Article } from "@/types/articles";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ArticleCard(article: Article) {
+  const queryClient = useQueryClient();
+
   return (
-    <div className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:cursor-pointer hover:shadow-xl">
+    <div
+      className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:cursor-pointer hover:shadow-xl"
+      onMouseEnter={() => {
+        queryClient.prefetchQuery({
+          queryKey: ["articlesDetail", article.id],
+          queryFn: () => apiGetDetailArticles(article.id),
+        });
+      }}
+    >
       <Link className="absolute inset-0 z-10" href={`/articles/${article.id}`}>
         <span className="sr-only">View article</span>
       </Link>
