@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+
+import { useRouter } from "next/navigation";
 
 export function ErrorComponent({ error }: { error: string }) {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className="flex min-h-full flex-col items-center justify-center py-12 text-center">
@@ -22,9 +24,9 @@ export function ErrorComponent({ error }: { error: string }) {
           onClick={() => {
             // check if there is a previous page
             if (window.history.length > 2) {
-              navigate(-1);
+              router.back();
             } else {
-              navigate("/articles");
+              router.push("/");
             }
           }}
         >

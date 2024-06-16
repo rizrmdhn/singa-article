@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+
+import { useRouter } from "next/navigation";
 
 export function NotFoundComponent() {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center px-4 py-12 text-center">
@@ -17,7 +19,9 @@ export function NotFoundComponent() {
         </p>
         <a
           className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-6 text-sm font-medium text-gray-50 shadow transition-colors hover:cursor-pointer hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            router.back();
+          }}
         >
           Go back home
         </a>
