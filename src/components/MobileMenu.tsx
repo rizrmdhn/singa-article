@@ -17,7 +17,9 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import useAuthUser from "@/hooks/useAuthUser";
 import useLogout from "@/hooks/useLogout";
+import { useTheme } from "next-themes";
 export default function MobileMenu() {
+  const { theme, setTheme } = useTheme();
   const { mutate, status } = useLogout();
   const { data, status: authUserStatus } = useAuthUser();
 
@@ -47,7 +49,10 @@ export default function MobileMenu() {
               <Package2 className="h-6 w-6" />
               <span className="sr-only">Singa</span>
             </Link>
-            <Link href="/" className={isActiveMobile(location === "/")}>
+            <Link
+              href="/dashboard"
+              className={isActiveMobile(location === "/dashboard")}
+            >
               <Home className="h-5 w-5" />
               Dashboard
             </Link>
@@ -76,7 +81,13 @@ export default function MobileMenu() {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => {}}>Change Theme</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setTheme(theme === "dark" ? "light" : "dark");
+            }}
+          >
+            Change Theme
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => mutate()}

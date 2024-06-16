@@ -23,7 +23,10 @@ export default function DesktopMenu() {
       </div>
       <div className="flex-1">
         <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-          <Link href="/" className={isActiveDesktop(location === "/")}>
+          <Link
+            href="/dashboard"
+            className={isActiveDesktop(location === "/dashboard")}
+          >
             <Home className="h-4 w-4" />
             Dashboard
           </Link>
