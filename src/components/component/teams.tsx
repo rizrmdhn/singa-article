@@ -38,24 +38,6 @@ const Link = (item: ITeams) => {
   const top = useTransform(mouseYSpring, [0.5, -0.5], ["40%", "60%"]);
   const left = useTransform(mouseXSpring, [0.5, -0.5], ["60%", "70%"]);
 
-  // const handleMouseMove = (
-  //   e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  // ) => {
-  //   const rect = ref.current!.getBoundingClientRect();
-
-  //   const width = rect.width;
-  //   const height = rect.height;
-
-  //   const mouseX = e.clientX - rect.left;
-  //   const mouseY = e.clientY - rect.top;
-
-  //   const xPct = mouseX / width - 0.5;
-  //   const yPct = mouseY / height - 0.5;
-
-  //   x.set(xPct);
-  //   y.set(yPct);
-  // };
-
   return (
     <motion.div
       initial="initial"
@@ -107,7 +89,7 @@ const Link = (item: ITeams) => {
         }}
         transition={{ type: "spring" }}
         src={item.profile}
-        className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
+        className="absolute z-0 hidden h-24 w-32 rounded-lg object-cover md:block md:h-48 md:w-64"
         alt={`Image representing a link for ${item.name}`}
       />
 
@@ -123,7 +105,7 @@ const Link = (item: ITeams) => {
           },
         }}
         transition={{ type: "spring" }}
-        className="relative z-10 flex flex-col gap-3 p-4 md:flex-row md:gap-5"
+        className="relative z-10 hidden flex-col gap-3 p-4 md:flex md:flex-row md:gap-5"
       >
         <a href={item.github} target="_blank">
           <Github className="h-10 w-10 group-hover:stroke-blue-primary" />
@@ -132,6 +114,19 @@ const Link = (item: ITeams) => {
           <Linkedin className="h-10 w-10 group-hover:stroke-blue-primary" />
         </a>
       </motion.div>
+      <img
+        src={item.profile}
+        className="absolute left-1/4 top-0 z-10 h-20 w-28 translate-x-[60%] translate-y-8 rotate-12 scale-0 rounded-lg object-cover duration-300 group-hover:scale-100 md:hidden md:h-48 md:w-64"
+        alt={`Image representing a link for ${item.name}`}
+      />
+      <div className="relative z-50 flex translate-x-10 flex-col gap-3 p-4 opacity-0 duration-150 group-hover:translate-x-0 group-hover:opacity-100 md:hidden md:flex-row md:gap-5">
+        <a href={item.github} target="_blank">
+          <Github className="h-10 w-10 group-hover:stroke-blue-primary" />
+        </a>
+        <a href={item.linkedin} target="_blank">
+          <Linkedin className="h-10 w-10 group-hover:stroke-blue-primary" />
+        </a>
+      </div>
     </motion.div>
   );
 };
