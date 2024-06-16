@@ -4,7 +4,7 @@ import { db } from "@/server/db";
 import { articles } from "@/server/db/schema";
 import googleCloudStorageService from "@/services/google_cloud_storage";
 import { eq } from "drizzle-orm";
-import { roles } from "drizzle/schema";
+import { roles, users } from "drizzle/schema";
 import fs from "fs";
 import { Readable, pipeline } from "stream";
 import { promisify } from "util";
@@ -32,66 +32,31 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: number } },
 ) {
-  if (!params.id) {
-    return new Response(
-      JSON.stringify(responseFormatter(400, "error", "Bad request")),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-  }
-
-  const userCookie = await getUser();
-
-  if (!userCookie) {
-    return new Response(
-      JSON.stringify(responseFormatter(403, "error", "Unauthorized")),
-      {
-        status: 403,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-  }
-
-  const userRole = await db
-    .select()
-    .from(roles)
-    .where(eq(roles.id, userCookie?.role_id))
-    .limit(1)
-    .execute();
-
-  if (userRole.length === 0 || !userRole[0]) {
-    return new Response(
-      JSON.stringify(responseFormatter(403, "error", "Unauthorized")),
-      {
-        status: 403,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-  }
-
-  if (userRole[0].name !== "admin") {
-    return new Response(
-      JSON.stringify(responseFormatter(403, "error", "Unauthorized")),
-      {
-        status: 403,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-  }
-
   const articleData = await db
-    .select()
+    .select({
+      id: articles.id,
+      title: articles.title,
+      description: articles.description,
+      image_url: articles.image_url,
+      created_by: articles.created_by,
+      created_at: articles.created_at,
+      updated_at: articles.updated_at,
+      user: {
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        role_id: users.role_id,
+        role: {
+          id: roles.id,
+          // @ts-ignore
+          name: roles.name,
+          created_at: roles.created_at,
+        },
+      },
+    })
     .from(articles)
+    .leftJoin(users, eq(articles.created_by, users.id))
+    .leftJoin(roles, eq(users.role_id, roles.id))
     .where(eq(articles.id, params.id));
 
   if (articleData.length === 0 || !articleData[0]) {

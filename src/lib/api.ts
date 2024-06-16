@@ -1,5 +1,5 @@
 import SchemaValidationError from "@/errors/SchemaValidationError";
-import type { Article } from "@/types/articles";
+import type { Article, DetailArticle } from "@/types/articles";
 import type {
   ErrorResponse,
   LoginResponse,
@@ -111,13 +111,13 @@ async function apiGetArticles() {
 async function apiGetDetailArticles(id: string) {
   try {
     const response = await axios.get(`/api/articles/${id}`);
-    const { meta } = response.data as SuccessResponse<Article>;
+    const { meta } = response.data as SuccessResponse<DetailArticle>;
 
     if (meta.code !== 200 || meta.status !== "success") {
       throw new Error(meta.message);
     }
 
-    const { data } = response.data as SuccessResponse<Article>;
+    const { data } = response.data as SuccessResponse<DetailArticle>;
 
     return data;
   } catch (error) {
