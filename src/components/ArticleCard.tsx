@@ -12,7 +12,7 @@ export default function ArticleCard(article: Article) {
         alt={article.title}
         className="h-60 w-full object-cover"
         height={300}
-        src={article.imageUrl}
+        src={article.image_url}
         style={{
           aspectRatio: "450/300",
           objectFit: "cover",

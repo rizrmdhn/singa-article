@@ -1,17 +1,19 @@
+"use client";
+
 import moment from "moment";
 import "moment/locale/id";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
-import { useParams } from "react-router-dom";
 import { Skeleton } from "../ui/skeleton";
 import useGetDetailArticle from "@/hooks/useGetDetailArticle";
 import { ErrorComponent } from "./error-component";
+import Image from "next/image";
 
-export function ArticleDetailSection() {
-  const { id } = useParams();
-
-  if (id === undefined) return null;
-
+export function ArticleDetailSection({ id }: { id: string }) {
   const { data, status, error } = useGetDetailArticle(id);
+
+  if (id === undefined) return <ErrorComponent error="Id not found" />;
+
+  // @ts-ignore
 
   if (error) return <ErrorComponent error={error.message} />;
 
@@ -31,11 +33,11 @@ export function ArticleDetailSection() {
           {status === "pending" ? (
             <Skeleton className="h-80 w-full" />
           ) : (
-            <img
+            <Image
               alt={data?.title}
               className="h-auto w-full rounded-lg object-cover"
               height={500}
-              src={data?.imageUrl}
+              src={data?.image_url}
               style={{
                 aspectRatio: "800/500",
                 objectFit: "cover",
@@ -64,7 +66,7 @@ export function ArticleDetailSection() {
               <Skeleton className="h-10 w-full" />
             ) : (
               <p
-                className="prose rounded-lg p-2 text-gray-500 lg:prose-lg xl:prose-xl dark:bg-slate-500 dark:text-gray-400"
+                className="prose lg:prose-lg xl:prose-xl rounded-lg p-2 text-gray-500 dark:bg-slate-500 dark:text-gray-400"
                 dangerouslySetInnerHTML={{ __html: data?.description ?? "" }}
               ></p>
             )}
