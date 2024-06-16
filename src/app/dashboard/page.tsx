@@ -1,14 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { getUser } from "@/app/auth";
-import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
-  const user = await getUser();
-  if (!user) {
-    redirect("/login");
-  }
-
   return (
     <>
       <div className="flex items-center">

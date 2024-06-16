@@ -1,10 +1,10 @@
-import { User } from "./user";
+import type { User } from "./user";
 
 export type Article = {
   id: string;
   title: string;
   description: string;
-  imageUrl: string;
+  image_url: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -13,7 +13,7 @@ export type DetailArticle = {
   id: number;
   title: string;
   description: string;
-  imageUrl: string;
+  image_url: string;
   createdBy: number;
   createdAt: Date;
   updatedAt: Date;

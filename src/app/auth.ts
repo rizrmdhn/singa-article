@@ -8,7 +8,7 @@ import { cache } from "react";
 const adapter = new DrizzlePostgreSQLAdapter(db, session, users); // your adapter
 
 export const lucia = new Lucia(adapter, {
-  sessionExpiresIn: new TimeSpan(1, "m"),
+  sessionExpiresIn: new TimeSpan(30, "d"),
   sessionCookie: {
     expires: process.env.NODE_ENV === "production", // 30 days
     attributes: {

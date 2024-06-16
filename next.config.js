@@ -6,6 +6,9 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  images: {
+    domains: ["storage.googleapis.com"],
+  },
   webpack: (config, { isServer }) => {
     // Add a custom rule for .node files
     config.module.rules.push({

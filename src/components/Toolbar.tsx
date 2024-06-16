@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Editor } from "@tiptap/react";
+import type { Editor } from "@tiptap/react";
 import {
   RiBold,
   RiItalic,

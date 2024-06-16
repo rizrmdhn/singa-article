@@ -1,4 +1,6 @@
 import MainLayout from "@/layout/MainLayout";
+import { getUser } from "../auth";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Dashboard | Singa Article",
@@ -6,10 +8,15 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = await getUser();
+  if (!user) {
+    redirect("/login");
+  }
+
   return <MainLayout>{children}</MainLayout>;
 }

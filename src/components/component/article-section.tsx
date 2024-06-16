@@ -29,7 +29,7 @@ export function ArticleSection() {
                 No Article Found
               </h2>
               <p className="max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Sorry, we couldn't find any article.
+                Sorry, we couldn&apos;t find any article.
               </p>
             </div>
           ) : (

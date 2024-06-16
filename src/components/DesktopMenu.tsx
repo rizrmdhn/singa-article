@@ -31,8 +31,8 @@ export default function DesktopMenu() {
             Dashboard
           </Link>
           <Link
-            href={"/articles"}
-            className={isActiveDesktop(location === "/articles")}
+            href={"/dashboard/articles"}
+            className={isActiveDesktop(location === "/dashboard/articles")}
           >
             <Newspaper className="h-4 w-4" />
             Articles

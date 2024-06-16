@@ -1,3 +1,5 @@
+"use client";
+
 import { EditorContent, useEditor } from "@tiptap/react";
 import Heading from "@tiptap/extension-heading";
 import Document from "@tiptap/extension-document";

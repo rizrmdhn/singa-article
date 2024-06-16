@@ -13,7 +13,7 @@ export const metadata = {
 export default async function LoginPage() {
   const user = await getUser();
   if (user) {
-    redirect("/user");
+    redirect("/dashboard");
   }
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-5">

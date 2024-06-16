@@ -143,7 +143,7 @@ export const conversation_translationsRelations = relations(
 
 export const sessionsRelations = relations(session, ({ one }) => ({
   user: one(users, {
-    fields: [session.user_id],
+    fields: [session.userId],
     references: [users.id],
   }),
 }));

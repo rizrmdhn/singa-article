@@ -57,8 +57,8 @@ export default function MobileMenu() {
               Dashboard
             </Link>
             <Link
-              href={"/articles"}
-              className={isActiveMobile(location === "/articles")}
+              href={"/dashboard/articles"}
+              className={isActiveMobile(location === "/dashboard/articles")}
             >
               <Newspaper className="h-5 w-5" />
               Articles
