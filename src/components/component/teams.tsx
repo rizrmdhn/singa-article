@@ -1,10 +1,13 @@
+import { ITeams, Teams } from "@/constant/Teams";
 import { useMotionValue, useSpring, useTransform, motion } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
-// import { useRef } from "react";
 
-export const HoverImageLinks = () => {
+export function HoverImageLinks() {
   return (
-    <section className="flex w-full flex-col items-center p-4 md:p-8">
+    <section
+      className="flex w-full flex-col items-center p-4 md:p-8"
+      id="teams"
+    >
       <h2 className="inline-block bg-gradient-to-b from-blue-primary to-blue-tertiary bg-clip-text text-4xl font-bold text-transparent">
         Our Teams
       </h2>
@@ -15,49 +18,15 @@ export const HoverImageLinks = () => {
         on your journey.
       </p>
       <div className="mx-auto w-full md:px-44">
-        <Link
-          heading="Andrien"
-          subheading="Cloud Computing"
-          imgSrc="/mockup1.png"
-          href="#"
-        />
-        <Link
-          heading="Daniel"
-          subheading="Cloud Computing"
-          imgSrc="/mockup1.png"
-          href="#"
-        />
-        <Link
-          heading="Rizki"
-          subheading="Android Developer"
-          imgSrc="/mockup1.png"
-          href="#"
-        />
-        <Link
-          heading="Dip"
-          subheading="Android Developer"
-          imgSrc="/mockup1.png"
-          href="#"
-        />
-        <Link
-          heading="Fun"
-          subheading="Incase you're bored"
-          imgSrc="/mockup1.png"
-          href="#"
-        />
+        {Teams.map((team, i) => (
+          <Link key={i} {...team} />
+        ))}
       </div>
     </section>
   );
-};
-
-interface LinkProps {
-  heading: string;
-  imgSrc: string;
-  subheading: string;
-  href: string;
 }
 
-const Link = ({ heading, imgSrc, subheading }: LinkProps) => {
+const Link = (item: ITeams) => {
   // const ref = useRef<HTMLAnchorElement | null>(null);
 
   const x = useMotionValue(0);
@@ -106,7 +75,7 @@ const Link = ({ heading, imgSrc, subheading }: LinkProps) => {
           }}
           className="relative z-10 block text-4xl font-bold text-gray-400 transition-colors duration-500 group-hover:text-blue-primary md:text-6xl"
         >
-          {heading.split("").map((l, i) => (
+          {item.name.split("").map((l, i) => (
             <motion.span
               variants={{
                 initial: { x: 0 },
@@ -121,7 +90,7 @@ const Link = ({ heading, imgSrc, subheading }: LinkProps) => {
           ))}
         </motion.span>
         <span className="relative z-10 mt-2 block text-base text-gray-400 transition-colors duration-500 group-hover:text-blue-primary">
-          {subheading}
+          {item.role}
         </span>
       </div>
 
@@ -137,9 +106,9 @@ const Link = ({ heading, imgSrc, subheading }: LinkProps) => {
           whileHover: { scale: 1, rotate: "12.5deg" },
         }}
         transition={{ type: "spring" }}
-        src={imgSrc}
+        src={item.profile}
         className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
-        alt={`Image representing a link for ${heading}`}
+        alt={`Image representing a link for ${item.name}`}
       />
 
       <motion.div
@@ -156,10 +125,10 @@ const Link = ({ heading, imgSrc, subheading }: LinkProps) => {
         transition={{ type: "spring" }}
         className="relative z-10 flex flex-col gap-3 p-4 md:flex-row md:gap-5"
       >
-        <a href="">
+        <a href={item.github} target="_blank">
           <Github className="h-10 w-10 group-hover:stroke-blue-primary" />
         </a>
-        <a href="">
+        <a href={item.linkedin} target="_blank">
           <Linkedin className="h-10 w-10 group-hover:stroke-blue-primary" />
         </a>
       </motion.div>

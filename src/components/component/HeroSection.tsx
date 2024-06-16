@@ -1,10 +1,11 @@
+import { Mockup } from "@/constant/Mockup";
 import { InfiniteMovingCards } from "./Mockup";
 
 export default function HeroSection() {
   return (
     <section
       id="home"
-      className="flex h-fit min-h-screen w-full flex-col items-center justify-end gap-5 overflow-hidden bg-gradient-to-br from-blue-primary via-blue-secondary to-blue-tertiary px-2 text-white md:gap-20"
+      className="flex h-fit min-h-screen w-full flex-col items-center justify-end gap-5 bg-gradient-to-br from-blue-primary via-blue-secondary to-blue-tertiary px-2 text-white md:gap-20"
     >
       <section className="mt-28 flex flex-col items-center gap-4">
         <h1 className="text-center text-3xl font-bold lg:text-5xl">
@@ -41,22 +42,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
-const Mockup: Array<String> = [
-  "/mockup1.png",
-  "/mockup2.png",
-  "/mockup3.png",
-  "/mockup4.png",
-  "/mockup1.png",
-  "/mockup2.png",
-  "/mockup3.png",
-  "/mockup4.png",
-  "/mockup1.png",
-  "/mockup2.png",
-  "/mockup3.png",
-  "/mockup4.png",
-  "/mockup1.png",
-  "/mockup2.png",
-  "/mockup3.png",
-  "/mockup4.png",
-];

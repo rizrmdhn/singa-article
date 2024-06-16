@@ -138,7 +138,7 @@ export default function Footer() {
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:col-span-2">
-            <div className="flex w-full justify-center gap-10 md:gap-20">
+            <div className="flex w-full justify-evenly gap-10 md:gap-20">
               <div className="text-center sm:text-left">
                 <p className="text-lg font-medium text-gray-100">About Us</p>
 
@@ -146,7 +146,7 @@ export default function Footer() {
                   <li>
                     <a
                       className="text-gray-300 transition hover:text-gray-300/75"
-                      href="#"
+                      href="https://github.com/Signa-Lingua/singa-app/releases/latest"
                     >
                       Download the App
                     </a>
@@ -155,7 +155,7 @@ export default function Footer() {
                   <li>
                     <a
                       className="text-gray-300 transition hover:text-gray-300/75"
-                      href="#"
+                      href="#teams"
                     >
                       Meet the Team
                     </a>
@@ -182,47 +182,45 @@ export default function Footer() {
               </div>
 
               <div className="text-center sm:text-left">
-                <p className="text-lg font-medium text-gray-100">
-                  Our Services
-                </p>
+                <p className="text-lg font-medium text-gray-100">Our Feature</p>
 
                 <ul className="mt-8 space-y-4 text-sm">
                   <li>
                     <a
                       className="text-gray-300 transition hover:text-gray-300/75"
-                      href="#"
+                      href="#transcript"
                     >
-                      Singa Translate
+                      Translate
                     </a>
                   </li>
 
                   <li>
                     <a
                       className="text-gray-300 transition hover:text-gray-300/75"
-                      href="#"
+                      href="#realtime"
                     >
                       {" "}
-                      Singa Realtime
+                      Realtime
                     </a>
                   </li>
 
                   <li>
                     <a
                       className="text-gray-300 transition hover:text-gray-300/75"
-                      href="#"
+                      href="#message"
                     >
                       {" "}
-                      Singa Conversation
+                      Conversation
                     </a>
                   </li>
 
                   <li>
                     <a
                       className="text-gray-300 transition hover:text-gray-300/75"
-                      href="#"
+                      href="/articles"
                     >
                       {" "}
-                      Singa Article
+                      Article
                     </a>
                   </li>
                 </ul>
@@ -253,7 +251,9 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1 text-gray-300">john@doe.com</span>
+                    <span className="flex-1 text-gray-300">
+                      singa@gmail.com
+                    </span>
                   </a>
                 </li>
 
@@ -302,8 +302,8 @@ export default function Footer() {
                     />
                   </svg>
 
-                  <address className="-mt-0.5 flex-1 not-italic text-gray-300">
-                    Online Office, Jakarta, Indonesia
+                  <address className="flex-1 not-italic text-gray-300">
+                    Online Office, Indonesia
                   </address>
                 </li>
               </ul>

@@ -9,7 +9,7 @@ import BlogSection from "@/components/component/Blog";
 
 export default function LandingPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between scroll-smooth bg-white bg-gradient-to-br text-black">
+    <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden scroll-smooth bg-white bg-gradient-to-br text-black">
       <Navbar />
       <HeroSection />
       <VideoSection />
