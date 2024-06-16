@@ -1,5 +1,5 @@
 import React from "react";
-import { getUser } from "../user/action";
+import { getUser } from "@/app/auth";
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/LoginForm";
 import Link from "next/link";
@@ -10,7 +10,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default async function Page() {
+export default async function LoginPage() {
   const user = await getUser();
   if (user) {
     redirect("/user");
