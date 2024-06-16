@@ -13,7 +13,7 @@ export default function VideoSection() {
       >
         <div className="h-full w-full overflow-hidden rounded-xl md:shadow-2xl md:shadow-blue-tertiary">
           <iframe
-            src={"https://www.youtube.com/embed/Uer540qlGZc"}
+            src={"https://www.youtube.com/embed/XNhLLJ7GuhY"}
             title="YouTube video player"
             allowFullScreen
             className="h-full w-full"
