@@ -18,7 +18,7 @@ export default function ArticleCard(article: Article) {
       }}
     >
       <Link className="absolute inset-0 z-10" href={`/articles/${article.id}`}>
-        <span className="sr-only">View article</span>
+        <span className="sr-only"></span>
       </Link>
       <Image
         alt={article.title}

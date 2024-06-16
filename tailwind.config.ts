@@ -18,7 +18,11 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sen: ["Sen", "sans-serif"],
+      },
       colors: {
+        default: "#040316",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -52,6 +56,11 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        blue: {
+          primary: "#4BA6F8",
+          secondary: "#397ED4",
+          tertiary: "#2656B0",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -67,10 +76,21 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        scroll:
+          "scroll var(--animation-duration, 200s) var(--animation-direction, forwards) linear infinite",
+      },
+      height: {
+        "custom-screen": "calc(100vh - 18rem)",
+        fillMaxScreen: "100dvh",
       },
     },
   },
