@@ -1,4 +1,4 @@
-import { SchemaError } from "@/types/response";
+import { type SchemaError } from "@/types/response";
 
 class SchemaValidationError extends Error {
   public errors: SchemaError[];
