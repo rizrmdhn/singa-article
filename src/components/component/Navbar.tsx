@@ -77,7 +77,7 @@ export default function Navbar() {
               <li key={`link=${idx}`}>
                 <a
                   href={navItem.link}
-                  className="text-white hover:text-gray-100"
+                  className="text-white hover:text-gray-200"
                 >
                   {navItem.name}
                 </a>

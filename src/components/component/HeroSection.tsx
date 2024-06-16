@@ -23,14 +23,14 @@ export default function HeroSection() {
           <a
             href="https://github.com/Signa-Lingua/singa-app/releases/latest"
             target="_blank"
-            className="hover:bg-deep-purple-accent-700 focus:shadow-outline mr-6 inline-flex h-12 items-center justify-center rounded bg-white px-6 font-medium tracking-wide text-blue-tertiary shadow-md transition duration-200 focus:outline-none"
+            className="focus:shadow-outline mr-6 inline-flex h-12 items-center justify-center rounded bg-white px-6 font-medium tracking-wide text-blue-tertiary shadow-md transition duration-200 hover:bg-gray-200 focus:outline-none"
           >
             Download
           </a>
           <a
             href="#about"
             aria-label=""
-            className="hover:text-deep-purple-accent-700 inline-flex items-center font-semibold text-white transition-colors duration-200"
+            className="inline-flex items-center font-semibold text-white transition-colors duration-200 hover:text-gray-200"
           >
             About Us
           </a>

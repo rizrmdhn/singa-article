@@ -16,7 +16,7 @@ export default function FeatureSection() {
       <h2 className="inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text text-3xl font-bold text-transparent">
         Welcome To Our
       </h2>
-      <h2 className="inline-block bg-gradient-to-b from-blue-primary to-blue-tertiary bg-clip-text text-4xl font-bold text-transparent">
+      <h2 className="-mb-2 inline-block bg-gradient-to-b from-blue-primary to-blue-tertiary bg-clip-text pb-2 text-4xl font-bold text-transparent">
         Amazing Feature
       </h2>
       <div className="my-6 flex w-full flex-col items-center justify-center gap-5 md:gap-8">
