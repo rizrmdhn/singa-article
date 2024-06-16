@@ -25,11 +25,11 @@ export const createArticleSchema = z.object({
     .refine((fileList) => fileList.length > 0, "No file selected")
     .refine(
       (fileList) =>
-        fileList.length === 1 && fileList[0].type.startsWith("image/"),
+        fileList.length === 1 && fileList[0]!.type.startsWith("image/"),
       "Please select an image",
     )
     .refine(
-      (fileList) => fileList[0].size < 5 * 1024 * 1024,
+      (fileList) => fileList[0]!.size < 5 * 1024 * 1024,
       "Please select an image smaller than 5MB",
     ),
 });
@@ -59,11 +59,11 @@ export const updateArticleSchema = z.object({
     .refine((fileList) => fileList.length > 0, "No file selected")
     .refine(
       (fileList) =>
-        fileList.length === 1 && fileList[0].type.startsWith("image/"),
+        fileList.length === 1 && fileList[0]!.type.startsWith("image/"),
       "Please select an image",
     )
     .refine(
-      (fileList) => fileList[0].size < 5 * 1024 * 1024,
+      (fileList) => fileList[0]!.size < 5 * 1024 * 1024,
       "Please select an image smaller than 5MB",
     )
     .optional(),
