@@ -2,7 +2,7 @@ import { env } from "@/env";
 import type {
   TGCPStorage,
   TGoogleFileServiceResult,
-} from "@/types/GoogleCloudStorageService";
+} from "@/types/googleCloudStorageService";
 import { type FileMetadata, Storage } from "@google-cloud/storage";
 
 class GoogleCloudStorageService {
