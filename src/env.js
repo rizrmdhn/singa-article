@@ -11,6 +11,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    GOOGLE_CLOUD_STORAGE_PROJECT_ID: z.string(),
+    GOOGLE_CLOUD_STORAGE_KEY_FILE_PATH: z.string(),
     GOOGLE_CLOUD_STORAGE_BUCKET_NAME: z.string(),
     GOOGLE_CLOUD_STORAGE_STORAGE_PATH: z.string(),
   },
@@ -32,6 +34,10 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+    GOOGLE_CLOUD_STORAGE_PROJECT_ID:
+      process.env.GOOGLE_CLOUD_STORAGE_PROJECT_ID,
+    GOOGLE_CLOUD_STORAGE_KEY_FILE_PATH:
+      process.env.GOOGLE_CLOUD_STORAGE_KEY_FILE_PATH,
     GOOGLE_CLOUD_STORAGE_BUCKET_NAME:
       process.env.GOOGLE_CLOUD_STORAGE_BUCKET_NAME,
     GOOGLE_CLOUD_STORAGE_STORAGE_PATH:

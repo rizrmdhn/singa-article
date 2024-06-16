@@ -14,9 +14,16 @@ class GoogleCloudStorageService {
     this.init();
   }
 
+
+
   async init() {
     try {
-      this.#gcloudStorage = new Storage();
+      this.#gcloudStorage = new Storage(
+        {
+          projectId: env.GOOGLE_CLOUD_STORAGE_PROJECT_ID,
+          keyFilename: env.GOOGLE_CLOUD_STORAGE_KEY_FILE_PATH,
+        }
+      );
     } catch (error) {
       const e = error as Error;
       return {
