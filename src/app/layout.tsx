@@ -1,6 +1,8 @@
 import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import Providers from "./providers";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "Create T3 App",
@@ -14,8 +16,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${GeistSans.variable}`}
+      suppressHydrationWarning
+    >
+      <body>
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
+      </body>
     </html>
   );
 }
