@@ -2,7 +2,7 @@ import { localStorageFunctions } from "./api";
 
 function getLocalTheme() {
   const localTheme = localStorageFunctions.getTheme();
-  const colorTheme = localTheme === "light" ? "light" : "dark";
+  const colorTheme = localTheme === "dark" ? "dark" : "light";
 
   const root = window.document.documentElement;
   if (localTheme) {
