@@ -16,8 +16,7 @@ export default function HeroSection() {
           </span>
         </h1>
         <p className="text-center italic md:w-3/5 md:text-xl">
-          An app that developed to fasilitate easy and effective communication
-          between deaf and hearing individuals.
+          An app to facilitate easy and effective communication between deaf and hearing individuals
         </p>
         <div className="my-5 flex w-full items-center justify-center md:mt-10">
           <a

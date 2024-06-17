@@ -19,8 +19,7 @@ export default function Footer() {
             </div>
 
             <p className="mt-6 max-w-md text-center leading-relaxed text-gray-300 sm:max-w-xs sm:text-left">
-              An app that developed to fasilitate easy and effective
-              communication between deaf and hearing individuals.
+              An app to facilitate easy and effective communication between deaf and hearing individuals
             </p>
 
             <ul className="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
@@ -318,7 +317,7 @@ export default function Footer() {
             </p>
 
             <p className="mt-4 text-sm text-gray-100 sm:order-first sm:mt-0">
-              &copy; {new Date().getFullYear()} Singa
+              &copy; {new Date().getFullYear()} SINGA
             </p>
           </div>
         </div>
