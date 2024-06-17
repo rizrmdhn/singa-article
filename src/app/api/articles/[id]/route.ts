@@ -236,7 +236,7 @@ export async function PUT(
         description: description?.toString() ?? oldArticle[0].description,
         image_url: imageUrl ?? oldArticle[0].image_url,
         created_by: userCookie.id,
-        created_at: new Date().toISOString(),
+        created_at: oldArticle[0].created_at,
         updated_at: new Date().toISOString(),
       })
       .where(eq(articles.id, oldArticle[0].id))
