@@ -10,14 +10,14 @@ export default function FeatureSection() {
       className="relative flex w-full flex-col items-center bg-white p-5"
       id="feature"
     >
-      <div className="bg-blue-tertiary absolute bottom-0 left-0 h-20 w-20 rounded-full mix-blend-multiply blur-3xl filter"></div>
-      <div className="bg-blue-tertiary absolute right-0 top-0 h-28 w-28 rounded-full mix-blend-multiply blur-3xl filter"></div>
-      <div className="bg-blue-tertiary absolute left-0 top-96 h-28 w-28 rounded-full mix-blend-multiply blur-3xl filter"></div>
-      <div className="bg-blue-tertiary absolute right-0 top-1/2 h-28 w-28 rounded-full mix-blend-multiply blur-3xl filter"></div>
-      <h2 className="inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text text-3xl font-bold text-transparent">
-        Welcome To Our
+      <div className="absolute bottom-0 left-0 h-20 w-20 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
+      <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
+      <div className="absolute left-0 top-96 h-28 w-28 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
+      <div className="absolute right-0 top-1/2 h-28 w-28 rounded-full bg-blue-tertiary mix-blend-multiply blur-3xl filter"></div>
+      <h2 className="-mb-2 inline-block bg-gradient-to-b from-slate-500 to-black bg-clip-text pb-2 text-3xl font-bold text-transparent">
+        Introducing To Our
       </h2>
-      <h2 className="from-blue-primary to-blue-tertiary -mb-2 inline-block bg-gradient-to-b bg-clip-text pb-2 text-4xl font-bold text-transparent">
+      <h2 className="-mb-2 inline-block bg-gradient-to-b from-blue-primary to-blue-tertiary bg-clip-text pb-2 text-4xl font-bold text-transparent">
         Amazing Feature
       </h2>
       <div className="my-6 flex w-full flex-col items-center justify-center gap-5 md:gap-8">
@@ -44,7 +44,7 @@ function Feature({ reverse, item }: { reverse: boolean; item: IFeatureItem }) {
     >
       <motion.div className="flex flex-col gap-3 md:gap-5">
         <div className="flex items-center gap-2">
-          <div className="from-blue-primary via-blue-secondary to-blue-tertiary flex h-16 w-16 items-center justify-start rounded-xl bg-gradient-to-b p-3 md:h-20 md:w-20">
+          <div className="flex h-16 w-16 items-center justify-start rounded-xl bg-gradient-to-b from-blue-primary via-blue-secondary to-blue-tertiary p-3 md:h-20 md:w-20">
             <div>{item.icon}</div>
           </div>
           <h1 className="text-2xl font-bold md:text-3xl">{item.title}</h1>

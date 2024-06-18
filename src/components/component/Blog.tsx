@@ -67,8 +67,9 @@ export default function ArticleSection() {
 }
 
 function BlogCard(article: Article) {
-  const { id, title, description, image_url, createdAt } = article;
+  const { id, title, description, image_url, created_at } = article;
 
+  console.log("article", article);
   return (
     <a className="group cursor-pointer" href={`/articles/${id}`}>
       <div className="relative overflow-hidden rounded-xl pt-[50%] sm:pt-[70%]">
@@ -81,10 +82,10 @@ function BlogCard(article: Article) {
         />
         <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-blue-500 px-3 py-1.5 text-xs font-medium text-white dark:bg-neutral-900">
           {
-            new Date(createdAt).toLocaleDateString("en-US", {
+            new Date(created_at).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
-            }) // Sep 10
+            }) // Jul 12
           }
         </span>
       </div>

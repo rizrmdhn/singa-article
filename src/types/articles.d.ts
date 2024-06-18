@@ -5,7 +5,7 @@ export type Article = {
   title: string;
   description: string;
   image_url: string;
-  createdAt: string;
+  created_at: string;
   updatedAt: string;
 };
 
