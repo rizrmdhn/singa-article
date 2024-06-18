@@ -259,7 +259,6 @@ export async function PUT(
       },
     );
   } catch (e) {
-    console.log(e);
     return new Response(
       JSON.stringify(
         responseFormatter(500, "error", "Internal server error", e),

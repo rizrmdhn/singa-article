@@ -10,7 +10,6 @@ import Image from "next/image";
 
 export function ArticleDetailSection({ id }: { id: string }) {
   const { data, status, error } = useGetDetailArticle(id);
-  console.log("🚀 ~ ArticleDetailSection ~ data:", data);
 
   if (id === undefined) return <ErrorComponent error="Id not found" />;
 

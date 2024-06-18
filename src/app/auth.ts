@@ -74,7 +74,7 @@ export const getUser = cache(async () => {
       );
     }
   } catch (error) {
-    console.error(error);
+    return null;
   }
 
   return user;
