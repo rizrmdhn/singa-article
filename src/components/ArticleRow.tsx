@@ -16,8 +16,11 @@ import { useRouter } from "next/navigation";
 import moment from "moment";
 import "moment/locale/id";
 import useDeleteArticle from "@/hooks/useDeleteArticle";
+import { useQueryClient } from "@tanstack/react-query";
+import { apiGetDetailArticles } from "@/lib/api";
 
 export default function ArticleRow(article: Article) {
+  const queryClient = useQueryClient();
   const { mutate } = useDeleteArticle(article.id);
 
   const router = useRouter();
@@ -64,6 +67,12 @@ export default function ArticleRow(article: Article) {
                 className="hover:cursor-pointer"
                 onClick={() => {
                   router.push(`/dashboard/articles/${article.id}/edit`);
+                }}
+                onMouseEnter={() => {
+                  queryClient.prefetchQuery({
+                    queryKey: ["articlesDetail", article.id],
+                    queryFn: () => apiGetDetailArticles(article.id),
+                  });
                 }}
               >
                 Edit
