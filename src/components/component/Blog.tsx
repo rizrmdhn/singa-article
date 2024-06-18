@@ -69,7 +69,6 @@ export default function ArticleSection() {
 function BlogCard(article: Article) {
   const { id, title, description, image_url, created_at } = article;
 
-  console.log("article", article);
   return (
     <a className="group cursor-pointer" href={`/articles/${id}`}>
       <div className="relative overflow-hidden rounded-xl pt-[50%] sm:pt-[70%]">

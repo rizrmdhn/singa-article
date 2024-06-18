@@ -49,7 +49,7 @@ export function ArticleDetailSection({ id }: { id: string }) {
             <Skeleton className="mb-4 h-10 w-full" />
           ) : (
             <p className="mb-4 text-gray-500 dark:text-gray-400">
-              {moment(data?.createdAt).locale("id").fromNow()}
+              {moment(data?.created_at).locale("id").fromNow()}
             </p>
           )}
           <div className="mb-6">
@@ -64,7 +64,7 @@ export function ArticleDetailSection({ id }: { id: string }) {
               <Skeleton className="h-10 w-full" />
             ) : (
               <p
-                className="prose lg:prose-lg xl:prose-xl rounded-lg p-2 text-gray-500 dark:bg-slate-500 dark:text-gray-400"
+                className="prose rounded-lg p-2 text-gray-500 lg:prose-lg xl:prose-xl dark:bg-slate-500 dark:text-gray-400"
                 dangerouslySetInnerHTML={{ __html: data?.description ?? "" }}
               ></p>
             )}

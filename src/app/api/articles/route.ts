@@ -149,7 +149,15 @@ export async function POST(request: NextRequest) {
     // Remove the local file after uploading
     fs.unlink(filePath, (err) => {
       if (err) {
-        console.error("Failed to delete local file:", err);
+        return new Response(
+          JSON.stringify(responseFormatter(500, "error", err.message)),
+          {
+            status: 500,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
       }
     });
 
@@ -182,7 +190,6 @@ export async function POST(request: NextRequest) {
       },
     );
   } catch (e) {
-    console.log(e);
     return new Response(
       JSON.stringify(
         responseFormatter(500, "error", "Internal server error", e),

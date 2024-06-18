@@ -48,7 +48,7 @@ export default function ArticleRow(article: Article) {
           {moment(article.created_at).locale("id").format("LL")}
         </TableCell>
         <TableCell>
-          {moment(article.updatedAt).locale("id").format("LL")}
+          {moment(article.updated_at).locale("id").format("LL")}
         </TableCell>
         <TableCell>
           <DropdownMenu>

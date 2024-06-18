@@ -131,7 +131,6 @@ export default function EditArticlePage({
                   });
 
                   if (!parsedData.success) {
-                    console.log(parsedData.error.issues);
                     parsedData.error.issues.forEach((issue) => {
                       toast({
                         title: "Error",
