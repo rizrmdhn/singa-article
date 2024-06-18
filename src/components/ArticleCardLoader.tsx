@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ArticleCardLoader() {
   return (
-    <div className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+    <div className="group relative max-w-64 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl ">
       <a className="absolute inset-0 z-10" href="#">
         <Skeleton className="h-60 w-full" />
       </a>

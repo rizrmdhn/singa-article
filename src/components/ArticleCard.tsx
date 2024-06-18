@@ -9,7 +9,7 @@ export default function ArticleCard(article: Article) {
 
   return (
     <div
-      className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:cursor-pointer hover:shadow-xl"
+      className="group relative max-w-64 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:cursor-pointer hover:shadow-xl"
       onMouseEnter={() => {
         queryClient.prefetchQuery({
           queryKey: ["articlesDetail", article.id],
