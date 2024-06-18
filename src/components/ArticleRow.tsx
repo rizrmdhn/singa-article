@@ -45,7 +45,7 @@ export default function ArticleRow(article: Article) {
           }}
         ></TableCell>
         <TableCell className="hidden md:table-cell">
-          {moment(article.createdAt).locale("id").format("LL")}
+          {moment(article.created_at).locale("id").format("LL")}
         </TableCell>
         <TableCell>
           {moment(article.updatedAt).locale("id").format("LL")}
