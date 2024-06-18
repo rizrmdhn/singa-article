@@ -39,18 +39,18 @@ const Tiptap = ({
       }),
       Document,
       Heading.configure({
-        HTMLAttributes: { class: "text-black dark:text-white" },
+        HTMLAttributes: { class: "text-inherit" },
       }),
       Paragraph.configure({
-        HTMLAttributes: { class: "text-black dark:text-white" },
+        HTMLAttributes: { class: "text-inherit" },
       }),
       Text.configure({
-        HTMLAttributes: { class: "text-black dark:text-white" },
+        HTMLAttributes: { class: "text-inherit" },
       }),
       CodeBlock.configure({
         HTMLAttributes: {
           class:
-            "rounded p-5 border-foreground border-2 text-black dark:text-white mb-3 mt-3",
+            "rounded p-5 border-foreground border-2 text-inherit mb-3 mt-3",
         },
       }),
       BulletList.configure({ HTMLAttributes: { class: "list-disc" } }),
@@ -60,7 +60,7 @@ const Tiptap = ({
     editorProps: {
       attributes: {
         class: cn(
-          "rounded p-5 border-foreground border-2 text-black dark:text-white prose-2xl",
+          "rounded p-5 border-foreground border-2 text-inherit prose-2xl",
           attributPropsClassName,
         ),
       },
