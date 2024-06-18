@@ -6,7 +6,7 @@ export type Article = {
   description: string;
   image_url: string;
   created_at: string;
-  updatedAt: string;
+  updated_at: string;
 };
 
 export type DetailArticle = {
@@ -14,8 +14,8 @@ export type DetailArticle = {
   title: string;
   description: string;
   image_url: string;
-  createdBy: number;
-  createdAt: Date;
-  updatedAt: Date;
+  create_by: number;
+  created_at: Date;
+  updated_at: Date;
   user: User;
 };
