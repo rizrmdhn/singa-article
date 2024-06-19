@@ -11,7 +11,7 @@ import Footer from "@/components/component/Footer";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden scroll-smooth bg-white bg-gradient-to-br text-black">
+    <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden bg-white bg-gradient-to-br text-black">
       <Navbar />
       <HeroSection />
       <VideoSection />
