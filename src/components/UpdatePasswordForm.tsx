@@ -8,10 +8,11 @@ import { LoaderCircle } from "lucide-react";
 
 export default function UpdatePasswordForm() {
   const { mutate, status } = useUpdatePassword();
+
   return (
     <AutoForm
-      onSubmit={(values) => {
-        mutate(values);
+      onSubmit={(finalValues) => {
+        mutate(finalValues);
       }}
       formSchema={updatePasswordSchema}
       fieldConfig={{

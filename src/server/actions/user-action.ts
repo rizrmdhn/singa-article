@@ -9,6 +9,7 @@ import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import { actionClient } from "@/lib/safe-action";
 import { updatePasswordSchema } from "@/schema/users";
+import { revalidatePath } from "next/cache";
 
 export const getAuthenticatedUser = async () => {
   const userCookie = await getUser();
@@ -24,7 +25,7 @@ export const getAuthenticatedUser = async () => {
 
 export const updateUserPassword = actionClient
   .schema(updatePasswordSchema)
-  .action(async ({ parsedInput: { newPassword } }) => {
+  .action(async ({ parsedInput: { currentPassword, newPassword } }) => {
     const userCookie = await getUser();
 
     if (!userCookie) {
@@ -37,10 +38,10 @@ export const updateUserPassword = actionClient
       return responseFormatter(404, "error", "User not found");
     }
 
-    const verifyPasswordResult = await verify(user.password!, newPassword);
+    const verifyPasswordResult = await verify(user.password!, currentPassword);
 
     if (!verifyPasswordResult) {
-      return responseFormatter(400, "error", "Invalid user credentials");
+      return responseFormatter(400, "error", "Invalid password");
     }
 
     const hashedPassword = await hash(newPassword);
@@ -53,6 +54,7 @@ export const updateUserPassword = actionClient
       .where(eq(users.id, user.id))
       .returning();
 
+    revalidatePath("/dashboard/settings/password");
     return responseFormatter(
       200,
       "success",

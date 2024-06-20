@@ -147,7 +147,7 @@ export const users = pgTable(
     created_at: timestamp("created_at", {
       withTimezone: true,
       mode: "string",
-    }).notNull(),
+    }).defaultNow(),
     updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" }),
   },
   (table) => {
