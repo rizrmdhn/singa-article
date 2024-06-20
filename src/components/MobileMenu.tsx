@@ -85,7 +85,7 @@ export default function MobileMenu() {
             <Avatar className="h-10 w-10 border">
               <AvatarImage
                 alt={(data as unknown as User)?.name}
-                src={(data as unknown as User)?.avatarUrl ?? ""}
+                src={(data as unknown as User)?.avatar_url ?? ""}
               />
               <AvatarFallback>
                 {(data as unknown as User)?.name?.[0]}
