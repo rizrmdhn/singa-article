@@ -19,11 +19,12 @@ export default function EditArticlePage({
   params: { id: string };
 }) {
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState<FileList | undefined>();
+  const [image, setImage] = useState("");
   const [value, setValue] = useState("");
   const [formError, setFormError] = useState<ZodIssue[]>();
 
   const { data, status, error } = useGetDetailArticle(params.id);
+
   const { mutate: updateArticle, status: updateStatus } = useUpdateArticle(
     params.id,
     title,
@@ -33,7 +34,7 @@ export default function EditArticlePage({
 
   useEffect(() => {
     if (status === "success" && data) {
-      setTitle(data.title);
+      setTitle(data.title as string);
       setValue(data.description);
     }
   }, [data, status]);
@@ -88,7 +89,15 @@ export default function EditArticlePage({
                   }
                   placeholder="Image URL"
                   onChange={(e) => {
-                    if (e.target.files) setImage(e.target.files);
+                    const file = e.target.files?.[0];
+
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setImage(reader.result as string);
+                      };
+                      reader.readAsDataURL(file);
+                    }
                   }}
                   accept="image/*"
                   type="file"
@@ -105,7 +114,7 @@ export default function EditArticlePage({
             <Skeleton className="h-96 w-full" />
           ) : (
             <>
-              <Tiptap text={data?.description} onUpdateText={setValue} />
+              <Tiptap value={data?.description} onChange={setValue} />
               {formError?.find((err) => err.path[0] === "description") && (
                 <p className="text-red-500">
                   {
@@ -125,6 +134,7 @@ export default function EditArticlePage({
                 className="w-full"
                 onClick={() => {
                   const parsedData = updateArticleSchema.safeParse({
+                    id: params.id,
                     title,
                     description: value,
                     image: image,

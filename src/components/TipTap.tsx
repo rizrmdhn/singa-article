@@ -14,20 +14,20 @@ import { Markdown } from "tiptap-markdown";
 import { cn } from "@/lib/utils";
 
 type TiptapProps = {
-  text: string;
+  value: string;
   toolBarClassName?: string;
   className?: string;
   isError?: boolean;
   attributPropsClassName?: string;
-  onUpdateText: (event: string) => void;
+  onChange: (value: string) => void;
 };
 
 const Tiptap = ({
-  text,
+  value,
   toolBarClassName,
   className,
   attributPropsClassName,
-  onUpdateText,
+  onChange,
 }: TiptapProps) => {
   const editor = useEditor({
     extensions: [
@@ -56,7 +56,7 @@ const Tiptap = ({
       BulletList.configure({ HTMLAttributes: { class: "list-disc" } }),
       OrderedList.configure({ HTMLAttributes: { class: "list-decimal" } }),
     ],
-    content: text,
+    content: value,
     editorProps: {
       attributes: {
         class: cn(
@@ -66,13 +66,13 @@ const Tiptap = ({
       },
     },
     onUpdate({ editor }) {
-      onUpdateText(editor.getHTML());
+      onChange(editor.getHTML());
     },
   });
 
   return (
     <>
-      <Toolbar editor={editor} className={toolBarClassName} />
+      {editor && <Toolbar editor={editor} className={toolBarClassName} />}
       <EditorContent
         editor={editor}
         className={cn("flex w-full flex-col", className)}

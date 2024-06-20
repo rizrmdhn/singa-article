@@ -3,7 +3,6 @@ import postgres from "postgres";
 
 import { env } from "@/env";
 import * as schema from "./schema";
-import * as relations from "./relations";
 
 /**
  * Cache the database connection in development. This avoids creating a new connection on every HMR
@@ -13,11 +12,7 @@ const globalForDb = globalThis as unknown as {
   conn: postgres.Sql | undefined;
 };
 
-const conn =
-  globalForDb.conn ??
-  postgres(
-    env.NODE_ENV === "production" ? env.DATABASE_URL : env.DATABASE_URL_DEV,
-  );
+const conn = globalForDb.conn ?? postgres(env.DATABASE_URL);
 if (env.NODE_ENV !== "production") globalForDb.conn = conn;
 
-export const db = drizzle(conn, { schema, ...relations });
+export const db = drizzle(conn, { schema });

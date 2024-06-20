@@ -25,12 +25,10 @@ import {
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import useLogin from "@/hooks/useLogin";
-import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const { toast } = useToast();
   const [type, setType] = useState<"text" | "password">("password");
-  const router = useRouter();
 
   const { status, mutate } = useLogin();
 
@@ -44,14 +42,6 @@ export default function LoginForm() {
 
   function handleSubmit(data: z.infer<typeof loginSchema>) {
     mutate(data, {
-      onSuccess: () => {
-        toast({
-          title: "Success",
-          description: "You have been logged in successfully",
-        });
-
-        router.push("/dashboard");
-      },
       onError: (error) => {
         toast({
           title: "Failed",

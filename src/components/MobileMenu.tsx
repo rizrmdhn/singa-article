@@ -18,6 +18,8 @@ import Link from "next/link";
 import useAuthUser from "@/hooks/useAuthUser";
 import useLogout from "@/hooks/useLogout";
 import { useTheme } from "next-themes";
+import type { User } from "@/types/user";
+
 export default function MobileMenu() {
   const { theme, setTheme } = useTheme();
   const { mutate, status } = useLogout();
@@ -72,8 +74,13 @@ export default function MobileMenu() {
             <Skeleton className="h-10 w-10" />
           ) : (
             <Avatar className="h-10 w-10 border">
-              <AvatarImage alt={data?.name} src={data?.avatarUrl ?? ""} />
-              <AvatarFallback>{data?.name?.[0]}</AvatarFallback>
+              <AvatarImage
+                alt={(data as unknown as User)?.name}
+                src={(data as unknown as User)?.avatarUrl ?? ""}
+              />
+              <AvatarFallback>
+                {(data as unknown as User)?.name?.[0]}
+              </AvatarFallback>
             </Avatar>
           )}
         </DropdownMenuTrigger>

@@ -1,7 +1,7 @@
 "use client";
 
 import useAddArticle from "@/hooks/useAddArticle";
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import type { ZodIssue } from "zod";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -10,12 +10,11 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { createArticleSchema } from "@/schema/article";
 import { useRouter } from "next/navigation";
-import { Skeleton } from "@/components/ui/skeleton";
 import { LoaderCircle } from "lucide-react";
 
 export default function AddNewArticlePage() {
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState<FileList | null>(null);
+  const [image, setImage] = useState("");
   const [value, setValue] = useState("");
   const [formError, setFormError] = useState<ZodIssue[]>();
 
@@ -52,7 +51,17 @@ export default function AddNewArticlePage() {
               : ""
           }
           placeholder="Image URL"
-          onChange={(e) => setImage(e.target.files)}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+
+            if (file) {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                setImage(reader.result as string);
+              };
+              reader.readAsDataURL(file);
+            }
+          }}
           accept="image/*"
           type="file"
         />
@@ -62,29 +71,18 @@ export default function AddNewArticlePage() {
           </p>
         )}
       </div>
-      <Suspense
-        fallback={
-          <div className="flex flex-col items-start justify-between gap-2">
-            <Skeleton className="h-11 w-full" />
-            <Skeleton className="h-11 w-full" />
-          </div>
+      <Tiptap
+        value={value}
+        onChange={setValue}
+        isError={
+          formError?.find((err) => err.path[0] === "description") ? true : false
         }
-      >
-        <Tiptap
-          text={value}
-          onUpdateText={setValue}
-          isError={
-            formError?.find((err) => err.path[0] === "description")
-              ? true
-              : false
-          }
-        />
-        {formError?.find((err) => err.path[0] === "description") && (
-          <p className="text-red-500">
-            {formError.find((err) => err.path[0] === "description")?.message}
-          </p>
-        )}
-      </Suspense>
+      />
+      {formError?.find((err) => err.path[0] === "description") && (
+        <p className="text-red-500">
+          {formError.find((err) => err.path[0] === "description")?.message}
+        </p>
+      )}
       <div className="flex flex-col items-start justify-between gap-2">
         <Button
           disabled={addArticleStatus === "pending"}
@@ -108,16 +106,14 @@ export default function AddNewArticlePage() {
             }
 
             addArticle(parsedData.data, {
-              onSuccess: () => {
-                setFormError(undefined);
-                setTitle("");
-                setImage(null);
-                setValue("");
-                router.push("/dashboard/articles");
-                toast({
-                  title: "Success",
-                  description: "Article has been created",
-                });
+              onSuccess: (data) => {
+                if (data?.data?.meta.status === "success") {
+                  setFormError(undefined);
+                  setTitle("");
+                  setImage("");
+                  setValue("");
+                  router.push("/dashboard/articles");
+                }
               },
             });
           }}

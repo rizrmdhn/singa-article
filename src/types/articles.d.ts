@@ -1,12 +1,19 @@
 import type { User } from "./user";
 
 export type Article = {
-  id: string;
+  id: number;
   title: string;
+  created_at: string | null;
+  updated_at: string | null;
   description: string;
   image_url: string;
-  created_at: string;
-  updated_at: string;
+  created_by: number | null;
+  user: {
+    id: number;
+    name: string | null;
+    // ... 8 more properties
+    updated_at: string | null;
+  } | null;
 };
 
 export type DetailArticle = {

@@ -1,33 +1,41 @@
 import { toast } from "@/components/ui/use-toast";
-import { apiUpdateArticle } from "@/lib/api";
 import { useOptimisticMutation } from "./useOptimisticMutation";
 import type { DetailArticle } from "@/types/articles";
 import { useQueryClient } from "@tanstack/react-query";
+import { updateArticle } from "@/server/actions/article-action";
 
 export default function useUpdateArticle(
   id: string,
   title: string,
   description: string,
-  image?: FileList | undefined,
+  image?: string,
 ) {
   const queryClient = useQueryClient();
 
   return useOptimisticMutation<DetailArticle>({
-    mutationFn: () => apiUpdateArticle({ id, title, description, image }),
+    mutationFn: () => updateArticle({ id, title, description, image }),
     queryKey: ["articleDetail", id],
-    onSuccess: () => {
-      toast({
-        title: "Success",
-        description: "Article updated successfully",
-      });
+    onSuccess: (data: any) => {
+      if (data?.data?.meta.status === "success") {
+        toast({
+          title: "Success",
+          description: "Article updated successfully",
+        });
 
-      queryClient.invalidateQueries({
-        queryKey: ["articleDetail", id],
-      });
+        queryClient.invalidateQueries({
+          queryKey: ["articleDetail", id],
+        });
 
-      queryClient.invalidateQueries({
-        queryKey: ["articles"],
-      });
+        queryClient.invalidateQueries({
+          queryKey: ["articles"],
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: data?.data?.meta.message,
+          variant: "destructive",
+        });
+      }
     },
     updater: (oldData) => {
       return {
