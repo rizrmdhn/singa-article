@@ -4,11 +4,11 @@ export type User = {
   id: number;
   name: string;
   email: string;
-  avatarUrl: null;
+  avatar_url: null;
   isSignUser: boolean;
-  roleId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  role_id: number;
+  created_at: Date;
+  updated_at: Date;
   role: Role;
   static: Conversation;
   conversation: Conversation;

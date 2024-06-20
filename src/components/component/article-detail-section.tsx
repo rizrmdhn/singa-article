@@ -84,7 +84,7 @@ export function ArticleDetailSection({ id }: { id: string }) {
                 <Avatar className="h-12 w-12 border">
                   <AvatarImage
                     alt={data?.user?.name}
-                    src={data?.user?.avatarUrl ?? ""}
+                    src={data?.user?.avatar_url ?? ""}
                   />
                   <AvatarFallback>{data?.user?.name?.[0]}</AvatarFallback>
                 </Avatar>
