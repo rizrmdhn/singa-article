@@ -1,3 +1,4 @@
+import { getUser } from "@/app/auth";
 import {
   Card,
   CardContent,
@@ -5,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import React from "react";
 
 export const metadata = {
@@ -14,15 +17,24 @@ export const metadata = {
 };
 
 export default async function DashboardPage() {
+  const user = await getUser();
+
   return (
     <Card className="">
       <CardHeader>
         <CardTitle>User Details</CardTitle>
-        <CardDescription>
-          Used to identify your store in the marketplace.
-        </CardDescription>
+        <CardDescription>This is your user details</CardDescription>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent className="grid grid-cols-1 gap-4">
+        <div className="w-full gap-2 text-start">
+          <Label className="text-1xl">Name</Label>
+          <Input className="w-full" defaultValue={user?.name} disabled />
+        </div>
+        <div className="w-full gap-2 text-start">
+          <Label className="text-1xl">Email</Label>
+          <Input className="w-full" defaultValue={user?.email} disabled />
+        </div>
+      </CardContent>
     </Card>
   );
 }
