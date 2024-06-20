@@ -154,6 +154,10 @@ class GoogleCloudStorageService {
   generatePath(subPath: string, fileName: string) {
     return `${this.#storagePath}/${subPath}/${fileName}`;
   }
+
+  async refreshStorage() {
+    this.init();
+  }
 }
 
 const googleCloudStorageService = new GoogleCloudStorageService();

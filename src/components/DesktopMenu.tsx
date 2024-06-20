@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Newspaper, Package2 } from "lucide-react";
+import { Home, Newspaper, Package2, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -36,6 +36,15 @@ export default function DesktopMenu() {
           >
             <Newspaper className="h-4 w-4" />
             Articles
+          </Link>
+          <Link
+            href={"/dashboard/settings"}
+            className={isActiveDesktop(
+              location.includes("/dashboard/settings"),
+            )}
+          >
+            <Settings className="h-4 w-4" />
+            Settings
           </Link>
         </nav>
       </div>

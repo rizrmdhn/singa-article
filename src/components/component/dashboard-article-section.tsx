@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -109,12 +103,6 @@ export default function DashboardArticleSection() {
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle>Articles</CardTitle>
-          <CardDescription>
-            List of all articles in the database
-          </CardDescription>
-        </CardHeader>
         <CardContent>
           {status === "pending" && loadingArticleRow()}
           {status === "error" && errorArticleRow()}

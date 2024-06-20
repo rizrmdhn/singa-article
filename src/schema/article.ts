@@ -17,24 +17,15 @@ export const createArticleSchema = z.object({
     .max(5000, {
       message: "Description is too long (maximum is 2000 characters)",
     }),
-  image: z
-    .custom<FileList>(
-      (fileList) => fileList instanceof FileList,
-      "Please select an file",
-    )
-    .refine((fileList) => fileList.length > 0, "No file selected")
-    .refine(
-      (fileList) =>
-        fileList.length === 1 && fileList[0]!.type.startsWith("image/"),
-      "Please select an image",
-    )
-    .refine(
-      (fileList) => fileList[0]!.size < 5 * 1024 * 1024,
-      "Please select an image smaller than 5MB",
-    ),
+  image: z.string({
+    required_error: "Please select an image",
+  }),
 });
 
 export const updateArticleSchema = z.object({
+  id: z.string({
+    required_error: "Article id is required",
+  }),
   title: z
     .string()
     .min(3, {
@@ -52,19 +43,8 @@ export const updateArticleSchema = z.object({
       message: "Description is too long (maximum is 2000 characters)",
     }),
   image: z
-    .custom<FileList>(
-      (fileList) => fileList instanceof FileList,
-      "Please select an file",
-    )
-    .refine((fileList) => fileList.length > 0, "No file selected")
-    .refine(
-      (fileList) =>
-        fileList.length === 1 && fileList[0]!.type.startsWith("image/"),
-      "Please select an image",
-    )
-    .refine(
-      (fileList) => fileList[0]!.size < 5 * 1024 * 1024,
-      "Please select an image smaller than 5MB",
-    )
+    .string({
+      required_error: "Please select an image",
+    })
     .optional(),
 });

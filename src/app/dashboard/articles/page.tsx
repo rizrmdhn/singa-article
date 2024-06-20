@@ -1,5 +1,5 @@
 import DashboardArticleSection from "@/components/component/dashboard-article-section";
-import { apiGetArticles } from "@/lib/api";
+import { fetchArticles } from "@/server/queries";
 import {
   HydrationBoundary,
   QueryClient,
@@ -19,12 +19,13 @@ export default async function ArticlePage() {
 
   await queryClient.prefetchQuery({
     queryKey: ["articles"],
-    queryFn: apiGetArticles,
+    queryFn: fetchArticles,
   });
 
   return (
     <>
       <div className="flex items-center">
+        <h1 className="text-lg font-semibold md:text-2xl">Articles</h1>
         {/* the button should be placed on the right */}
         <Link
           href={"/dashboard/articles/new"}

@@ -1,11 +1,11 @@
-import { apiDeleteArticles } from "@/lib/api";
 import type { Article } from "@/types/articles";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { toast } from "@/components/ui/use-toast";
+import { deleteArticle } from "@/server/actions/article-action";
 
-export default function useDeleteArticle(id: string) {
+export default function useDeleteArticle(id: number) {
   return useOptimisticMutation<Article[]>({
-    mutationFn: () => apiDeleteArticles(id),
+    mutationFn: () => deleteArticle(id),
     queryKey: ["articles"],
     onSuccess: () => {
       toast({

@@ -17,7 +17,7 @@ import moment from "moment";
 import "moment/locale/id";
 import useDeleteArticle from "@/hooks/useDeleteArticle";
 import { useQueryClient } from "@tanstack/react-query";
-import { apiGetDetailArticles } from "@/lib/api";
+import { getArticleDetail } from "@/server/actions/article-action";
 
 export default function ArticleRow(article: Article) {
   const queryClient = useQueryClient();
@@ -71,7 +71,7 @@ export default function ArticleRow(article: Article) {
                 onMouseEnter={() => {
                   queryClient.prefetchQuery({
                     queryKey: ["articlesDetail", article.id],
-                    queryFn: () => apiGetDetailArticles(article.id),
+                    queryFn: () => getArticleDetail(Number(article.id)),
                   });
                 }}
               >

@@ -25,7 +25,7 @@ export const authenticationsRelations = relations(
   }),
 );
 
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ many, one }) => ({
   authentications: many(authentications),
   articles: many(articles),
   auth_access_tokens: many(auth_access_tokens),
@@ -35,6 +35,10 @@ export const usersRelations = relations(users, ({ many }) => ({
   conversation_translations: many(conversation_translations),
   conversation_nodes: many(conversation_nodes),
   session: many(session),
+  role: one(roles, {
+    fields: [users.role_id],
+    references: [roles.id],
+  }),
 }));
 
 export const articlesRelations = relations(articles, ({ one }) => ({
