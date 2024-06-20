@@ -1,4 +1,4 @@
-import { getAuthenticatedUser } from "@/server/actions/user.action";
+import { getAuthenticatedUser } from "@/server/actions/user-action";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useAuthUser() {

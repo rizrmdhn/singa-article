@@ -3,12 +3,16 @@
 import React from "react";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 import { updatePasswordSchema } from "@/schema/users";
-import { updateUserPassword } from "@/server/actions/user.action";
+import useUpdatePassword from "@/hooks/useUpdatePassword";
+import { LoaderCircle } from "lucide-react";
 
 export default function UpdatePasswordForm() {
+  const { mutate, status } = useUpdatePassword();
   return (
     <AutoForm
-      onSubmit={(values) => updateUserPassword(values.newPassword)}
+      onSubmit={(values) => {
+        mutate(values);
+      }}
       formSchema={updatePasswordSchema}
       fieldConfig={{
         currentPassword: {
@@ -31,7 +35,12 @@ export default function UpdatePasswordForm() {
         },
       }}
     >
-      <AutoFormSubmit>Update Password</AutoFormSubmit>
+      <AutoFormSubmit disabled={status === "pending"}>
+        {status === "pending" ? (
+          <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+        ) : null}
+        Update Password
+      </AutoFormSubmit>
     </AutoForm>
   );
 }

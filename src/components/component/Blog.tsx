@@ -81,7 +81,7 @@ function BlogCard(article: Article) {
         />
         <span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-blue-500 px-3 py-1.5 text-xs font-medium text-white dark:bg-neutral-900">
           {
-            new Date(created_at).toLocaleDateString("en-US", {
+            new Date(created_at!!).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
             }) // Jul 12

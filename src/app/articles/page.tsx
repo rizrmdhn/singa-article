@@ -1,5 +1,5 @@
 import { ArticleSection } from "@/components/component/article-section";
-import { apiGetArticles } from "@/lib/api";
+import { fetchArticles } from "@/server/queries";
 import {
   HydrationBoundary,
   QueryClient,
@@ -12,7 +12,7 @@ export default async function ArticlePage() {
 
   await queryClient.prefetchQuery({
     queryKey: ["articles"],
-    queryFn: apiGetArticles,
+    queryFn: fetchArticles,
   });
 
   return (
