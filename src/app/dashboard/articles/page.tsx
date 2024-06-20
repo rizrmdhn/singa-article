@@ -25,6 +25,7 @@ export default async function ArticlePage() {
   return (
     <>
       <div className="flex items-center">
+        <h1 className="text-lg font-semibold md:text-2xl">Articles</h1>
         {/* the button should be placed on the right */}
         <Link
           href={"/dashboard/articles/new"}

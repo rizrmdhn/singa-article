@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Menu, Newspaper, Package2 } from "lucide-react";
+import { Home, Menu, Newspaper, Package2, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -65,6 +65,15 @@ export default function MobileMenu() {
               <Newspaper className="h-5 w-5" />
               Articles
             </Link>
+            <Link
+              href={"/dashboard/settings"}
+              className={isActiveMobile(
+                location.includes("/dashboard/settings"),
+              )}
+            >
+              <Settings className="h-5 w-5" />
+              Settings
+            </Link>
           </nav>
         </SheetContent>
       </Sheet>
@@ -87,7 +96,9 @@ export default function MobileMenu() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/settings">Settings</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
               setTheme(theme === "dark" ? "light" : "dark");

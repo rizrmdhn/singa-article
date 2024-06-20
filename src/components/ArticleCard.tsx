@@ -1,4 +1,4 @@
-import { apiGetDetailArticles } from "@/lib/api";
+import { fetchArticleById } from "@/server/queries";
 import type { Article } from "@/types/articles";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
@@ -13,7 +13,7 @@ export default function ArticleCard(article: Article) {
       onMouseEnter={() => {
         queryClient.prefetchQuery({
           queryKey: ["articlesDetail", article.id],
-          queryFn: () => apiGetDetailArticles(article.id),
+          queryFn: () => fetchArticleById(article.id),
         });
       }}
     >

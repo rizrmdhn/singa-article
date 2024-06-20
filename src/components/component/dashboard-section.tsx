@@ -17,7 +17,7 @@ export default async function DashboardSection() {
     >
       <Card className="sm:col-span-2">
         <CardHeader className="pb-3">
-          <CardTitle>List of Users</CardTitle>
+          <CardTitle>Users</CardTitle>
           <CardDescription className="max-w-lg text-balance text-2xl leading-relaxed text-black dark:text-white">
             {users.length}
           </CardDescription>
