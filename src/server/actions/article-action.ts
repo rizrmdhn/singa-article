@@ -108,11 +108,10 @@ export const createArticle = actionClient
         base64String: image,
         filePath,
       });
-
       const imageUrl = await googleCloudStorageService.save(
         "article",
         filePathWithExtension.filePath,
-        filePathWithExtension.fileExtension!,
+        filePathWithExtension.fileName,
       );
 
       if (imageUrl.error) {
@@ -141,6 +140,7 @@ export const createArticle = actionClient
       revalidatePath("/dashboard/articles");
       revalidatePath("/dashboard/articles/new");
 
+      await googleCloudStorageService.refreshStorage();
       return responseFormatter(200, "success", "Article created", newArticle);
     } catch (e) {
       return responseFormatter(500, "error", JSON.stringify(e));
@@ -206,7 +206,7 @@ export const updateArticle = actionClient
         const imageUrl = await googleCloudStorageService.save(
           "article",
           filePathWithExtension.filePath,
-          filePathWithExtension.fileExtension!,
+          filePathWithExtension.fileName,
         );
 
         if (imageUrl.error) {

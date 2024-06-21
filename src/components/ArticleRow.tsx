@@ -48,10 +48,10 @@ export default function ArticleRow(article: Article) {
           }}
         ></TableCell>
         <TableCell className="hidden md:table-cell">
-          {moment(article.created_at).locale("id").format("LL")}
+          {moment(article.created_at).locale("id").format("HH:mm, LL")}
         </TableCell>
         <TableCell>
-          {moment(article.updated_at).locale("id").format("LL")}
+          {moment(article.updated_at).locale("id").format("HH:mm, LL")}
         </TableCell>
         <TableCell>
           <DropdownMenu>

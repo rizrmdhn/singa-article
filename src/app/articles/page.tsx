@@ -1,10 +1,6 @@
 import { ArticleSection } from "@/components/component/article-section";
 import { fetchArticles } from "@/server/queries";
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import React from "react";
 
 export default async function ArticlePage() {
@@ -28,9 +24,7 @@ export default async function ArticlePage() {
             </p>
           </div>
         </div>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <ArticleSection />
-        </HydrationBoundary>
+        <ArticleSection />
       </div>
     </section>
   );

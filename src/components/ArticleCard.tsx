@@ -1,3 +1,5 @@
+"use client";
+
 import { getArticleDetail } from "@/server/actions/article-action";
 import type { Article } from "@/types/articles";
 import { useQueryClient } from "@tanstack/react-query";
