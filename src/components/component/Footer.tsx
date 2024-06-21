@@ -27,8 +27,8 @@ export default function Footer() {
             </div>
 
             <p className="mt-6 max-w-md text-center leading-relaxed text-gray-300 sm:max-w-xs sm:text-left">
-              An app to facilitate easy and effective communication between deaf
-              and hearing individuals
+              An app to facilitate easy and effective communication between
+              hearing impaired and ordinary individuals
             </p>
 
             <ul className="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
