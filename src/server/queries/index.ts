@@ -48,6 +48,7 @@ export const fetchUserByEmail = async (email: string) => {
 
 export const fetchArticles = async () => {
   const articles = await db.query.articles.findMany({
+    orderBy: (articles, { desc }) => desc(articles.created_at),
     with: {
       user: true,
     },
