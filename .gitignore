@@ -48,3 +48,7 @@ yarn-error.log*
 
 #dist
 dist
+
+# JSON
+service-account.json
+./service-account.json

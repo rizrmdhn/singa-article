@@ -2,9 +2,11 @@ import SchemaValidationError from "@/errors/SchemaValidationError";
 import { toast } from "@/components/ui/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createArticle } from "@/server/actions/article-action";
+import { useRouter } from "next/navigation";
 
 export default function useAddArticle() {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   return useMutation({
     mutationFn: createArticle,
@@ -15,6 +17,7 @@ export default function useAddArticle() {
           description: data?.data?.meta.message,
         });
 
+        router.back();
         return queryClient.invalidateQueries({
           queryKey: ["articles"],
         });
